@@ -1,0 +1,7 @@
+
+.main{
+
+  margin-left: 310px !important;
+
+  width: calc(100% - 310px) !important;
+}

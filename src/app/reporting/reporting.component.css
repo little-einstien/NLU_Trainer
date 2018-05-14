@@ -1,0 +1,27 @@
+<style>
+
+.bar{
+  fill: steelblue;
+}
+
+.bar:hover{
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.chart-main{
+  margin-left: 310px !important;
+}
+.chart-template{
+  margin-left: 310px;
+  width:500px;
+}

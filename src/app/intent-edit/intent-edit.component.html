@@ -1,0 +1,54 @@
+  <div class="col s10 main">
+    <nav>
+      <div class="nav-wrapper white">
+        <a class="purple waves-effect waves-light">SAVE</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li id="intent">
+            <div class="input-field " >
+            <input placeholder="Placeholder" [(ngModel)]="intent" id="intent" type="text" class="validate">
+            <label for="intent">Text</label>
+          </div>
+        </li>
+        </ul>
+      </div>
+    </nav>
+    <ul class="collapsible expandable">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">input</i>Text</div>
+        <div class="collapsible-body">
+          <ul class="collection">
+            <li class="collection-item">
+              <div class="input-field" >
+                <input placeholder="Placeholder" [(ngModel)]="text" id="text" type="text" class="validate">
+                <label for="text">Text</label>
+                <a class="btn-floating btn-small waves-effect waves-light red" (click) = "addText()"><i class="material-icons">add</i></a>
+              </div>
+
+            </li>
+            <li *ngFor="let text of texts" class="collection-item">
+              <blockquote>{{text}}</blockquote>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">input</i>Response</div>
+        <div class="collapsible-body">
+          <ul class="collection">
+            <li class="collection-item">
+              <div class="input-field" >
+                <input placeholder="Placeholder" [(ngModel)]="response" id="response" type="text" class="validate">
+                <label for="text">Response</label>
+                <a class="btn-floating btn-small waves-effect waves-light red" (click) = "addResponse()"><i class="material-icons">add</i></a>
+              </div>
+
+            </li>
+            <li *ngFor="let response of responses" class="collection-item">
+              <blockquote>{{response}}</blockquote>
+            </li>
+          </ul>
+
+        </div>
+      </li>
+    </ul>
+  </div>

@@ -1,0 +1,96 @@
+::ng-deep .mat-input-wrapper{
+
+      width:960px !important;
+
+    }
+
+::ng-deep .mat-input-element{
+
+background-color:black;
+
+}
+
+.example-container {
+
+  position: absolute;
+
+
+
+  bottom: 0;
+
+  left: 0;
+
+
+
+}
+
+#intent{
+  margin-left:60px;
+  width:800px;
+}
+
+
+
+.example-events {
+
+  width: 300px;
+
+  height: 200px;
+
+  overflow: auto;
+
+  border: 1px solid #555;
+
+}
+
+
+
+.example-fill-remaining-space {
+
+  /* This fills the remaining space, by using flexbox.
+
+     Every toolbar row uses a flexbox row layout. */
+
+  flex: 1 1 auto;
+
+}
+
+mat-grid-tile {
+
+  background: lightblue;
+
+}
+
+
+
+.my-grid-tile {
+
+    padding-top: 0px !important;
+
+}
+
+.main{
+
+  margin-left: 300px !important;
+
+  width: calc(100% - 300px) !important;
+
+}
+
+header, main, footer {
+
+     padding-left: 300px;
+
+   }
+.main{margin-top:10px;}
+
+
+   @media only screen and (max-width : 992px) {
+
+     header, main, footer {
+
+       padding-left: 0;
+
+     }
+
+   }
