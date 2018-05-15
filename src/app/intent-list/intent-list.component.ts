@@ -11,7 +11,7 @@ export class IntentListComponent implements OnInit {
   intent = "";
   constructor(private dataHandlerService: DataHandlerService) { }
   ngOnInit() {
-    this.dataHandlerService.doGET().then((data) =>{
+    this.dataHandlerService.doGET().then((data:Array<any>) =>{
         this.intents = data;
         console.log(this.intents)
     });

@@ -6,27 +6,30 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataHandlerService {
   apiRoot: string = "http://localhost:3000";
-  samples : Array<any>;
-  constructor(private http: HttpClient) { }
+  samples ;
+  constructor(private http: HttpClient) {
+    console.log("Constructor of service called");
+    //this.doGET();
+  }
   doGET() {
     return new Promise((resolve, reject) => {
      console.log("GET");
-       let url = this.apiRoot+'/getsamples';
+       let url = this.apiRoot+'/getintents';
        this.http.get(url).subscribe(res => {
          //console.log(res);
-         this.samples = res['rasa_nlu_data'].common_examples;
+         this.samples = res;
          resolve(this.samples);
        });
    });
   }
-  getSample(intent):Object{
+  getIntentDetails(intent){
     return new Promise((resolve, reject) => {
-      for(var i = 0 ; i < this.samples.length ;  i++){
-        if(samples[i].intent == intent){
-          resolve(sample[i]);
-          break;
-        }
-      }
+      let url = this.apiRoot+'/getintentdetails/'+intent;
+      this.http.get(url).subscribe(res => {
+        //console.log(res);
+        this.samples = res['details'];
+        resolve(this.samples);
+      });
     });
   }
 }
