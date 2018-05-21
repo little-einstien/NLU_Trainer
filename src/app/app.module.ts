@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { ReportingComponent } from './reporting/reporting.component';
 import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts'; // this is needed!
 import { HttpClientModule } from '@angular/common/http';
+import { FilterPipe} from './filter.pipe';
+import { NewProjectModalComponent } from './new-project-modal/new-project-modal.component';
 @NgModule({
   declarations: [
     SideMenuComponent,
@@ -17,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReportingComponent,
     DoughnutChartComponent,
     BarChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    FilterPipe,
+    NewProjectModalComponent
   ],
   imports: [
     BrowserModule,

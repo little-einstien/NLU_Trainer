@@ -1,9 +1,20 @@
-<ul id="slide-out" class=" sidenav sidenav-fixed ">
-  <ul class="collection with-header">
-    <li class="collection-header"><h4>NLU Trainer</h4></li>
-    <li class="collection-item"><div>Intents<a routerLink="/intentList" routerLinkActive="active" href="#!"  class="secondary-content"><i class="material-icons black-text">edit</i></a></div></li>
-    <li class="collection-item"><div>Intents Edit<a routerLink="/intentEdit" routerLinkActive="active" href="#!" class="secondary-content"><i class="material-icons black-text">edit</i></a></div></li>
-    <li class="collection-item"><div>Reporting<a routerLink="/reporting" routerLinkActive="active" href="#!" class="secondary-content"><i class="material-icons black-text">edit</i></a></div></li>
+<div id="intent-list-wrapper">
+  <ul id="slide-out" class=" sidenav sidenav-fixed ">
+    <ul class="collection with-header ">
+      <li class="collection-header center-align purple">
+        <i class=" material-icons black-text white-text ">all_inclusive</i>
+        <a routerLink="/" routerLinkActive="active"><span class="white-text f-20">PICASI NLU TRAINER</span></a>
+      </li>
+      <li class="collection-item grey lighten-3" >
+        <div>Intents<a routerLink="/intentList" routerLinkActive="active" href="#!" class="secondary-content "><i class="material-icons cyan-text">chevron_right</i></a></div>
+      </li>
+      <li class="collection-item grey lighten-3">
+        <div>Reporting<a routerLink="/reporting" routerLinkActive="active" href="#!" class="secondary-content"><i class="material-icons cyan-text">chevron_right</i></a></div>
+      </li>
+      <li class="collection-item grey lighten-3">
+        <div>Integration<a routerLink="/integrate" routerLinkActive="active" href="#!" class="secondary-content"><i class="material-icons cyan-text">chevron_right</i></a></div>
+      </li>
+    </ul>
   </ul>
-</ul>
+</div>
 <router-outlet></router-outlet>

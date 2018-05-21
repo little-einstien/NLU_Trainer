@@ -11,18 +11,25 @@ import * as M from 'materialize-css';
 })
 export class IntentEditComponent implements OnInit ,AfterViewInit{
   sample  = {};
+  projid = '';
   constructor(private route: ActivatedRoute,private dataHandlerService: DataHandlerService) {
     this.route.params.subscribe( params => {
       console.log(params);
-      this.intent = params.intent;
-      this.dataHandlerService.getIntentDetails(params.intent).then((data) =>{
-         for(var i in data){
-           this.texts.push(data[i]['text']);
-           this.responses.push(data[i]['response']);
-         }
-         //console.log(this.texts);
-      });
+      if(params.projid){
+        this.projid = params.projid;
+      }
+      if(params.intent){
+        this.intent = params.intent;
+        this.intentOld = params.intent;
+        this.dataHandlerService.getIntentDetails(this.projid,this.intent).then((data) =>{
+             this.texts = data['text'];
+             this.responses = data['response'];
+        });
+      }
     });
+  }
+  saveIntent(){
+    this.dataHandlerService.saveIntent({"proj_id" : this.projid,"old_intent":this.intentOld,"updated_intent":this.intent,"texts":this.texts,"responses":this.responses});
   }
   ngOnInit() {}
   ngAfterViewInit() {
@@ -30,6 +37,8 @@ export class IntentEditComponent implements OnInit ,AfterViewInit{
     var instance = M.Collapsible.init(elem, {
       accordion: false
     });
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems, {});
   }
   samples : Array<{intent: string, text: string,res: string}> = [];
   myControl: FormControl = new FormControl();
@@ -37,6 +46,7 @@ export class IntentEditComponent implements OnInit ,AfterViewInit{
   text : string;
   response : string;
   intent:string;
+  intentOld:string;
   options = [];
   texts = [];
   responses = [];
@@ -52,7 +62,7 @@ export class IntentEditComponent implements OnInit ,AfterViewInit{
 
   addText(){
     if(this.text){
-      this.texts.push(this.text);
+      this.texts.push({"value":this.text,"entities":[]});
       this.text = "";
     }
   }
@@ -62,5 +72,21 @@ export class IntentEditComponent implements OnInit ,AfterViewInit{
     this.response = "";
   }
   }
-
+  editTxt(txt,i){
+    if(this.text){
+      this.texts.push(this.text);
+    }
+    this.texts.splice( this.texts.indexOf(txt), 1 );
+    this.text = txt;
+  }
+  editResp(txt,i){
+    if(this.response){
+      this.responses.push(this.response);
+    }
+    this.responses.splice( this.responses.indexOf(txt), 1 );
+    this.response = txt;
+  }
+  test(){
+    console.log("TEST");
+  }
 }

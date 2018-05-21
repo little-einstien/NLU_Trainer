@@ -1,0 +1,50 @@
+<div  id="new-project-modal" class="modal" >
+  <div class="modal-content">
+    <h4>Create a new picasi</h4>
+    <p>Here some description will come if needed</p>
+    <div class="row">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="nickname" [(ngModel)]="project.nickname" placeholder="Nickname" type="text" class="validate">
+          </div>
+          <div class="input-field col s6">
+            <!-- <select>
+              <option value="" disabled selected>Choose your option</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select> -->
+            <!-- <input id="icon_prefix" type="text" class="validate"> -->
+          </div>
+        </div>
+        <div class="row p-l-0">
+          <div class="col s3 ">
+            <div class="switch">
+              <label>
+                <input [(ngModel)]="project.stt" type="checkbox">
+                <span class="lever"></span>
+                Speech to Text
+              </label>
+            </div>
+          </div>
+          <div class="col s3">
+            <div class="switch">
+              <label>
+                <input type="checkbox" [(ngModel)]="project.tts">
+                <span class="lever"></span>
+                Text to Speech
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class= "row">
+        <div class="col s3">
+          <a  (click) = "createNewProject()"class="purple btn waves-effect waves-light left ">CREATE</a>
+        </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a  class="modal-close waves-effect waves-puple btn-flat">CLOSE</a>
+  </div>
+</div>

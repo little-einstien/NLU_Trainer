@@ -1,54 +1,68 @@
-  <div class="col s10 main">
-    <nav>
-      <div class="nav-wrapper white">
-        <a class="purple waves-effect waves-light">SAVE</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li id="intent">
-            <div class="input-field " >
+<div class="main">
+  <nav>
+    <div class="nav-wrapper white">
+      <ul id="nav-mobile" class="hide-on-med-and-down">
+        <li id="intent" class=" col s10">
+          <div class="input-field">
             <input placeholder="Placeholder" [(ngModel)]="intent" id="intent" type="text" class="validate">
-            <label for="intent">Text</label>
           </div>
         </li>
+        <li class="col s2">
+          <a class="purple btn waves-effect waves-light" (click) = "saveIntent()">SAVE</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <ul class="collapsible expandable ">
+    <li class="active">
+      <div class="collapsible-header grey lighten-3">
+        <i class="material-icons tooltipped" data-position="top" data-tooltip="Tell the bot how user will react">chat_bubble_outline</i>User Reaction
+      </div>
+      <div class="collapsible-body user-say">
+        <ul class="collection with-header">
+          <li class="collection-header col s12 ">
+            <div class="input-field  col s10">
+                  <input placeholder="What will user say" [(ngModel)]="text" id="text" type="text" class="validate">
+           </div>
+           <div class = "col s2 center m-t-5">
+            <a class="purple btn waves-effect waves-light" (click)="addText()">ADD</a>
+           </div>
+          </li>
+        </ul>
+        <!-- <ul class="collection with-header main">
+          <li class="collection-item col s12 " *ngFor="let intent of intents "><div>{{intent.intent}}<a routerLink="/intentEdit/{{intent.intent}} " class="secondary-content "><i class="material-icons black-text ">chevron_right</i></a></div></li>
+        </ul> -->
+        <ul class="collection" [hidden] = "texts.length < 0">
+          <li *ngFor="let text of texts; index as i;" [attr.data-index]="i" class="collection-item">
+            <blockquote>{{text.value}} <a class="btn-flat right"><i (click)="editTxt(text.value,i)"   data-position="top" data-tooltip="Edit text" class="tooltipped material-icons">edit</i></a></blockquote>
+          </li>
         </ul>
       </div>
-    </nav>
-    <ul class="collapsible expandable ">
-      <li class="active">
-        <div class="collapsible-header"><i class="material-icons">input</i>Text</div>
-        <div class="collapsible-body">
-          <ul class="collection">
-            <li class="collection-item">
-              <div class="input-field" >
-                <input placeholder="Placeholder" [(ngModel)]="text" id="text" type="text" class="validate">
-                <label for="text">Text</label>
-                <a class="btn-floating btn-small waves-effect waves-light red" (click) = "addText()"><i class="material-icons">add</i></a>
-              </div>
-
-            </li>
-            <li *ngFor="let text of texts" class="collection-item">
-              <blockquote>{{text}}</blockquote>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">input</i>Response</div>
-        <div class="collapsible-body">
-          <ul class="collection">
-            <li class="collection-item">
-              <div class="input-field" >
-                <input placeholder="Placeholder" [(ngModel)]="response" id="response" type="text" class="validate">
-                <label for="text">Response</label>
-                <a class="btn-floating btn-small waves-effect waves-light red" (click) = "addResponse()"><i class="material-icons">add</i></a>
-              </div>
-
-            </li>
-            <li *ngFor="let response of responses" class="collection-item">
-              <blockquote>{{response}}</blockquote>
-            </li>
-          </ul>
-
-        </div>
-      </li>
-    </ul>
-  </div>
+    </li>
+    <li class="active">
+      <div class="collapsible-header grey lighten-3">
+        <i class="material-icons tooltipped" data-position="top" data-tooltip="Here you will write how the picasi will respond">chat_bubble_outline</i>Response
+      </div>
+      <div class="collapsible-body user-say">
+        <ul class="collection with-header">
+          <li class="collection-header col s12 ">
+            <div class="input-field  col s10">
+                  <input placeholder="How the picasi will respond" [(ngModel)]="response" id="response" type="text" class="validate">
+           </div>
+           <div class = "col s2 center m-t-5">
+            <a class="purple btn waves-effect waves-light" (click)="addResponse()">ADD</a>
+           </div>
+          </li>
+        </ul>
+        <!-- <ul class="collection with-header main">
+          <li class="collection-item col s12 " *ngFor="let intent of intents "><div>{{intent.intent}}<a routerLink="/intentEdit/{{intent.intent}} " class="secondary-content "><i class="material-icons black-text ">chevron_right</i></a></div></li>
+        </ul> -->
+        <ul class="collection" [hidden] = "responses.length < 0 ">
+          <li *ngFor="let response of responses; index as i" [attr.data-index]="i" class="collection-item">
+            <blockquote>{{response}} <a class="btn-flat right " ><i (click)="editResp(response,i)" data-position="top" data-tooltip="Edit response" class=" tooltipped material-icons">edit</i></a></blockquote>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

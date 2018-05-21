@@ -24,11 +24,6 @@ background-color:black;
 
 }
 
-#intent{
-  margin-left:60px;
-  width:800px;
-}
-
 
 
 .example-events {
@@ -71,18 +66,19 @@ mat-grid-tile {
 
 .main{
 
-  margin-left: 300px !important;
+  margin-left: 310px !important;
 
-  width: calc(100% - 300px) !important;
+  width: calc(100% - 320px) !important;
 
 }
+
 
 header, main, footer {
 
      padding-left: 300px;
 
    }
-.main{margin-top:10px;}
+
 
 
    @media only screen and (max-width : 992px) {
@@ -94,3 +90,45 @@ header, main, footer {
      }
 
    }
+.p-l-20{
+      padding-left: 20px;
+}
+
+.input-field input:focus, .input-field input[type=text]:valid, .input-field input[type=password]:valid, nav .input-field input[type=email]:valid, .input-field input[type=url]:valid,  .input-field input[type=date]:valid {
+    border: 1px solid rgba(0,0,0,.3);
+    padding: 0px 10px;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){
+    border-bottom-color:  purple;
+    box-shadow: 0 1px 0 0 purple;
+}
+
+li.active {
+    padding: 0px 0px;
+    border: 1px solid rgba(0,0,0,.5);
+}
+.user-say {
+    padding: 10px;
+}
+.user-say .input-field {
+  margin: 0px;
+}
+.collection {
+    border: 1px solid rgba(0,0,0,.5);
+    margin-bottom: 10px;
+}
+blockquote {
+  margin: 0px;
+  border-left-color: purple;
+}
+/* Common  class */
+.m-t-5 {
+  margin-top: 5px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+.collapsible-header:focus {
+    outline-color: transparent !important;
+}
