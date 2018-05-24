@@ -26,6 +26,7 @@
 }
 #intent-header{
   margin-bottom: 20px;
+    overflow: visible;
 }
 #intent-list li a{
   color : black;
@@ -51,4 +52,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 }
 .active-purple{
   background-color: purple;
+}
+.m-b-10{
+  margin-bottom: 20px;
 }

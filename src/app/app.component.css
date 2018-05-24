@@ -1,0 +1,19 @@
+.chat{
+
+    margin-left: 310px !important;
+
+
+      /* max-height: 450px;
+      overflow-y: scroll;
+      position: fixed;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 500px; */
+  }
+  .bottom-fixed{
+    margin-left: 310px !important;
+    position : fixed;
+    left : 0px;
+    bottom : 0px;
+    width:100%;
+    }

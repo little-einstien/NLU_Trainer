@@ -8,7 +8,7 @@
           </div>
         </li>
         <li class="col s2">
-          <a class="purple btn waves-effect waves-light" (click) = "saveIntent()">SAVE</a>
+          <a class="purple btn waves-effect waves-light" (click)="saveIntent()">SAVE</a>
         </li>
       </ul>
     </div>
@@ -22,19 +22,53 @@
         <ul class="collection with-header">
           <li class="collection-header col s12 ">
             <div class="input-field  col s10">
-                  <input placeholder="What will user say" [(ngModel)]="text" id="text" type="text" class="validate">
-           </div>
-           <div class = "col s2 center m-t-5">
-            <a class="purple btn waves-effect waves-light" (click)="addText()">ADD</a>
-           </div>
+              <input (mouseup)="setHighlightedTextFromInput()" placeholder="What will user say" [(ngModel)]="text" id="text" type="text" class="validate">
+            </div>
+            <div class="col s2 center m-t-5">
+              <a class="purple btn waves-effect waves-light" (click)="addText()">ADD</a>
+            </div>
           </li>
         </ul>
         <!-- <ul class="collection with-header main">
           <li class="collection-item col s12 " *ngFor="let intent of intents "><div>{{intent.intent}}<a routerLink="/intentEdit/{{intent.intent}} " class="secondary-content "><i class="material-icons black-text ">chevron_right</i></a></div></li>
         </ul> -->
-        <ul class="collection" [hidden] = "texts.length < 0">
-          <li *ngFor="let text of texts; index as i;" [attr.data-index]="i" class="collection-item">
-            <blockquote>{{text.value}} <a class="btn-flat right"><i (click)="editTxt(text.value,i)"   data-position="top" data-tooltip="Edit text" class="tooltipped material-icons">edit</i></a></blockquote>
+        <ul class="collection " [hidden]="texts.length < 0">
+          <li *ngFor="let text of texts; index as i;" [attr.data-index]="i" class="collection-item ">
+            <blockquote class="text-select" (mouseup)="setHighlightedText(i)">{{text.value}}
+              <a class="btn-flat right"><i (click)="editTxt(text.value,i)"   data-position="top" data-tooltip="Edit text" class="tooltipped material-icons">edit</i></a>
+              <a class="btn-flat right"><i (click) = "text.show = !text.show"  class="material-icons">add</i></a>
+            </blockquote>
+            <div [hidden]="!text.show" class="entity-edit">
+              <ul class="collection" >
+                <li class="collection-item">
+                    <table >
+                      <tbody class="p-0">
+                        <tr *ngFor="let entity of text.entities; index as j;" [attr.data-index]="j">
+                          <td>
+                            <span> {{text.value.slice(entity.start,entity.end)}}</span>
+                          </td>
+                          <td>
+                            <div class="input-field col s10 p-l-0">
+                              <input placeholder="Entity Name" [(ngModel)] = "entity.entity" type="text" class="validate">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="input-field  p-l-0 col s10">
+                              <input placeholder="Entity Value" [(ngModel)]="entity.name"  type="text" class="validate">
+                            </div>
+                          </td>
+                          <td><a class="btn-flat right"><i (click)="deleteEntity(i,j)"   data-position="top" data-tooltip="Delete this entity" class="tooltipped material-icons">delete_forever</i></a></td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                    <div [hidden] ="!text.highlightedText"><a class="waves-effect waves-light btn-small purple" (click) = "showEntityPopup(i)" >Add an entity for "{{text.highlightedText}}"</a></div>
+                    <div [hidden] ="text.highlightedText"><a class="waves-effect waves-light btn-small disabled "  >Select some text for adding entity</a></div>
+                  </li>
+
+
+              </ul>
+            </div>
           </li>
         </ul>
       </div>
@@ -47,19 +81,19 @@
         <ul class="collection with-header">
           <li class="collection-header col s12 ">
             <div class="input-field  col s10">
-                  <input placeholder="How the picasi will respond" [(ngModel)]="response" id="response" type="text" class="validate">
-           </div>
-           <div class = "col s2 center m-t-5">
-            <a class="purple btn waves-effect waves-light" (click)="addResponse()">ADD</a>
-           </div>
+              <input placeholder="How the picasi will respond" [(ngModel)]="response" id="response" type="text" class="validate">
+            </div>
+            <div class="col s2 center m-t-5">
+              <a class="purple btn waves-effect waves-light" (click)="addResponse()">ADD</a>
+            </div>
           </li>
         </ul>
         <!-- <ul class="collection with-header main">
           <li class="collection-item col s12 " *ngFor="let intent of intents "><div>{{intent.intent}}<a routerLink="/intentEdit/{{intent.intent}} " class="secondary-content "><i class="material-icons black-text ">chevron_right</i></a></div></li>
         </ul> -->
-        <ul class="collection" [hidden] = "responses.length < 0 ">
+        <ul class="collection" [hidden]="responses.length < 0 ">
           <li *ngFor="let response of responses; index as i" [attr.data-index]="i" class="collection-item">
-            <blockquote>{{response}} <a class="btn-flat right " ><i (click)="editResp(response,i)" data-position="top" data-tooltip="Edit response" class=" tooltipped material-icons">edit</i></a></blockquote>
+            <blockquote>{{response}} <a class="btn-flat right "><i (click)="editResp(response,i)" data-position="top" data-tooltip="Edit response" class=" tooltipped material-icons">edit</i></a></blockquote>
           </li>
         </ul>
       </div>

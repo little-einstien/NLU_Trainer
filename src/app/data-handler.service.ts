@@ -29,7 +29,7 @@ export class DataHandlerService {
     return new Promise((resolve, reject) => {
       let url = this.apiRoot + '/getprojects';
       this.http.get(url).subscribe(res => {
-        if (res.length != 0) {
+        if (res) {
           this.project = res[0].id;
           this.projectList = res;
         }

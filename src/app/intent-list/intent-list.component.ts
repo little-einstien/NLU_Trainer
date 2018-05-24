@@ -22,6 +22,7 @@ export class IntentListComponent implements OnInit {
     M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
     M.Tooltip.init(document.querySelectorAll('.tooltipped'), {});
     M.Modal.init(document.querySelectorAll('.modal'), {dismissible:false});
+    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'),{});
     console.log("Intent list intialized at ------> " +new Date().getTime());
     return this.dataHandlerService.getProjectList().then((list:Array<any>)=>{
       console.log(list);

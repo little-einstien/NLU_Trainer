@@ -19,11 +19,6 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     console.log("Side menu intialized at ----> "+ new Date().getTime());
     this.getProjectList();
   }
-  showTrainingToast() {
-    this.dataHandlerService.trainModel().then(function(data) {
-      M.toast({ html: data, displayLength: 1000, classes: 'rounded' })
-    });
-  }
 
   ngAfterViewInit() {
     M.Modal.init(document.querySelectorAll('.modal'), {});

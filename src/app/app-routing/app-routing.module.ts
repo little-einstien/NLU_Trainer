@@ -5,6 +5,8 @@ import { IntentEditComponent } from '../intent-edit/intent-edit.component';
 import { IntentListComponent } from '../intent-list/intent-list.component';
 import { ReportingComponent } from '../reporting/reporting.component';
 import {IntentListResolve} from  '../intent-list-resolver'
+import { AppComponent } from '../app.component';
+
 const routes : Routes = [
   {path:'intentList',component:IntentListComponent},
   //{path:'intentList',component:IntentListComponent,resolve:{intent : IntentListResolve}},
@@ -13,6 +15,7 @@ const routes : Routes = [
   {path:'intentEdit/:projid',component:IntentEditComponent},
   {path:'intentEdit',component:IntentEditComponent},
   {path:'reporting',component:ReportingComponent},
+  {path:'picasi/:project',component:AppComponent},
 ]
 @NgModule({
   imports: [

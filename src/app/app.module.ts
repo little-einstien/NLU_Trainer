@@ -11,6 +11,11 @@ import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'an
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPipe} from './filter.pipe';
 import { NewProjectModalComponent } from './new-project-modal/new-project-modal.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { MessageItemComponent } from './components/message-item/message-item.component';
+import { MessageFormComponent } from './components/message-form/message-form.component';
+import { EntityColappsibleComponent } from './entity-colappsible/entity-colappsible.component';
 @NgModule({
   declarations: [
     SideMenuComponent,
@@ -21,7 +26,12 @@ import { NewProjectModalComponent } from './new-project-modal/new-project-modal.
     BarChartComponent,
     PieChartComponent,
     FilterPipe,
-    NewProjectModalComponent
+    NewProjectModalComponent,
+    ChatbotComponent,
+    MessageListComponent,
+    MessageItemComponent,
+    MessageFormComponent,
+    EntityColappsibleComponent
   ],
   imports: [
     BrowserModule,
