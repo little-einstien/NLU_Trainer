@@ -1,28 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
-.tick text {
-        font-size: 12px;
-    }
+.p-l-10{
+    padding-left: 10px;
+}
+.p-r-10{
+    padding-right: 10px;
+}
 
-    .axis path,
-    .axis line {
-        fill: none;
-        stroke: #4C5554;
-        stroke-width: 1;
-    }
 
-    .x.axis .tick line {
-        display: none
-    }
+.dropdown-content {
+    top: 45px !important;
+    height: 200px !important;
+    width: 100% !important;
+  }
 
-    .domain {
-        display: block !important;
-        stroke: #4C5554 !important;
-        stroke-width: 2 !important;
-    }
-    .legend {
-        font-size: 12px;
-        font-family: sans-serif;
-        rect {
-            stroke-width: 2;
-        }
-    }
+  
+.project-setting {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+}
+#project-select {
+    padding-top:  0px;
+    padding-bottom:  0px;
+    position: relative;
+    padding-right: 34px;
+}
+
+#project-select .input-field {
+    margin: 0;
+}
+
+#project-select input.select-dropdown {
+    margin-bottom:  0px;
+    border-bottom:  0px;
+}
+
+.main{
+
+    margin-left: 310px !important;
+  
+    width: calc(100% - 320px) !important;
+  }
+  textarea[readonly] {
+    color: graytext;
+}
+.trans-select::-moz-selection{
+	background-color: transparent;
+}
+.trans-select::selection{
+	background-color: transparent;
+}
+#toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 10%;
+    left:7%;
+    color:white;
+  }

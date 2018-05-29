@@ -1,0 +1,10 @@
+.spacer{
+    margin-left: 310px !important;
+
+  width: calc(100% - 320px) !important;
+}
+#code-div {
+  background: white;
+  padding: 20px;
+  font-size: 14px;
+}

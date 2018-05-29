@@ -1,0 +1,36 @@
+<div id="intent-list-wrapper">
+  <ul id="slide-out" class=" sidenav sidenav-fixed ">
+    <ul class="collection with-header side-main">
+      <li class="collection-header center-align purple">
+        <!-- <i class=" material-icons black-text white-text ">all_inclusive</i> -->
+        <img src="assets/images/logo.png" alt="" height="200px" width="200px" class=" responsive-img "> <!-- notice the "circle" class -->
+        <a routerLink="/" routerLinkActive="active"><span class="white-text f-20">PICASI CREATOR</span></a>
+      </li>
+      <li class="collection-item grey lighten-3 " id ="project-select" >
+          <div class="input-field">
+              <select  [(ngModel)]="project.id" (ngModelChange)="projectChange($event)" class="p-l-10" aria-placeholder="Projects">
+                  <option  #plist *ngFor="let project of projectList;" value="{{project.id}}">{{project.name}}</option>
+                </select> 
+                <!-- <span><i class="material-icons cyan-text">configuration</i></span> -->
+            </div>          
+            <span class="project-setting"><a routerLink="settings/{{project.id}}" routerLinkActive="active" ><i class=" material-icons black-text ">settings</i></a></span>
+        </li>
+      <li class="collection-item grey lighten-3" >
+        <div>Intents<a routerLink="/intentList/{{project.id}}" routerLinkActive="active" href="#!" class="secondary-content "><i class="material-icons cyan-text">chevron_right</i></a></div>
+      </li>
+      <li class="collection-item grey lighten-3">
+        <div>Reporting<a routerLink="/reporting" routerLinkActive="active" href="#!" class="secondary-content"><i class="material-icons cyan-text">chevron_right</i></a></div>
+      </li>
+      <li class="collection-item grey lighten-3">
+        <div>Integration<a class="waves-effect waves-light modal-trigger secondary-content " href="#modal1"><i class="material-icons cyan-text">chevron_right</i></a></div>
+      </li>
+      <li class="collection-item grey lighten-3">
+          <a (click)="trainModel()" class="cyan btn">Train Model </a>
+          <!--  <a href="#new-project-modal" class="cyan  btn modal-trigger puple">Create project</a> -->
+        </li>
+    </ul>
+  </ul>
+</div>
+<app-integration></app-integration>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="cyan" type="ball-elastic-dots"></ngx-spinner>
+<router-outlet></router-outlet>
