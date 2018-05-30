@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChildren, QueryList, NgZone } from '@angular/core';
 import { DataHandlerService } from '../../services/data-handler.service';
 import * as M from 'materialize-css';
 import { AfterViewInit } from "@angular/core/src/metadata/lifecycle_hooks";
@@ -17,13 +17,15 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   project: Project = new Project("Create Project", 1, '-1');
   projectList: Array<Project> = [this.project];
   @ViewChildren('plist') list: QueryList<any>;
-  constructor(private dataHandlerService: DataHandlerService, private router: Router, private spinner: NgxSpinnerService) {
+  constructor(private dataHandlerService: DataHandlerService, private router: Router, 
+    private spinner: NgxSpinnerService,private zone:NgZone) {
     this.spinner.show();
     this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
       if(list && list.length != 0 ){ 
         this.projectList = this.projectList.concat(list);
         this.project = list[0];
-        this.router.navigate(['/intentList/' + this.project.id]);
+        console.log("init");
+        this.zone.run( () => this.router.navigate(['/intentList/' + this.project.id]));
         M.FormSelect.init(document.querySelectorAll('select'), {});
         this.spinner.hide();
       }else{
@@ -48,8 +50,19 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/newproj']);
       return;
     }
-    this.router.navigate(['/intentList/' + this.project.id]);
+    //M.FormSelect.init(document.querySelectorAll('select'),{});
+    this.zone.run( () => this.router.navigate(['/intentList/' + this.project.id]));
   }
+  projectSetting(){
+    if (this.project.id == "-1") {
+      this.dataHandlerService.showAlert('Please select the project');
+      return;
+    }else{
+      this.router.navigate(['/settings/'+this.project.id]);      
+    }
+  }
+
+
   trainModel() {
     let blockRef = this;
     this.dataHandlerService.showAlert('Training Started');

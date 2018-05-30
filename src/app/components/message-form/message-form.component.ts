@@ -32,10 +32,11 @@ export class MessageFormComponent implements OnInit {
     this.dialogFlowService.getResponse(this.message.content,this.botinit).then((res:any) => {
       console.log(res['res']);
       this.messages.push(
-        new Message(res['res'][0]  , 'assets/images/bot.png', res.timestamp)
+        // new Message(res['res'][0]  , 'assets/images/bot.png', 'bot',new Date(),JSON.stringify(res, null, 2))
+        new Message(res['res'][0]  , 'assets/images/bot.png', 'bot',new Date(),res)
       );
     });
-    this.message = new Message('', 'assets/images/user.png');
+    this.message = new Message('', 'assets/images/user.png','user');
 }
 onKeydown(event) {
   if (event.key === "Enter") {

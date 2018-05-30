@@ -1,12 +1,11 @@
 <div class="main">
-    <h4>Create a new picasi</h4>
-        <p>Here some description will come if needed</p>
-        <div class="row">
+    <h4 style="padding: 0 .75rem;">Update the details of <span class="orange-text">{{project.name}}</span> </h4>
+        <p style="padding: 0 .75rem;">Here some description will come if needed</p>
+        <div class="row border-1-solid">
             <div class="row">
-              <div class="input-field col s6">
-                <input id="nickname" [(ngModel)]="project.nickname" placeholder="Nickname" type="text" class="validate">
+              <div class="input-field col s12">
+                <input id="projectname" [(ngModel)]="project.name" placeholder="Name" type="text" class="validate">
               </div>
-              <div class="input-field col s6">
                 <!-- <select>
                   <option value="" disabled selected>Choose your option</option>
                   <option value="1">Option 1</option>
@@ -14,9 +13,8 @@
                   <option value="3">Option 3</option>
                 </select> -->
                 <!-- <input id="icon_prefix" type="text" class="validate"> -->
-              </div>
             </div>
-            <div class="row p-l-0">
+            <div class="row p-l-0 ">
               <div class="col s3 ">
                 <div class="switch">
                   <label>
@@ -36,10 +34,9 @@
                 </div>
               </div>
             </div>
-            <div class= "row">
-            <div class="col s3">
-              <a  (click) = "createNewProject()"class="purple btn waves-effect waves-light left ">CREATE</a>
-            </div>
+            <div class= "row center">
+              <a  (click) = "saveProject()"class="cyan btn waves-effect waves-light ">SAVE</a>
+              <a  (click) = "delProject()"class="cyan btn waves-effect waves-light margin-l-10 ">DELETE</a>
             </div>
         </div>
       </div>

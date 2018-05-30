@@ -7,19 +7,19 @@
       </select>
     </span>
     <span class="col s2"> -->
-      <!-- <a  routerLink="/intentEdit"  class=" purple btn waves-effect waves-light " >ADD INTENT</a> -->
-      <!-- <a href="#new-project-modal"  class="purple btn waves-effect waves-light  modal-trigger">CREATE NEW PICASI</a>
+<!-- <a  routerLink="/intentEdit"  class=" purple btn waves-effect waves-light " >ADD INTENT</a> -->
+<!-- <a href="#new-project-modal"  class="purple btn waves-effect waves-light  modal-trigger">CREATE NEW PICASI</a>
 </span> -->
-      <!-- <span class="col s3">
+<!-- <span class="col s3">
 
       <a (click)="showTrainingToast()" class="col s12 purple btn waves-effect waves-light ">Train Model</a>
       -->
-      <!-- Dropdown Trigger -->
-      <!-- <a class='dropdown-trigger cyan btn' href='#' data-target='dropdown1'>
+<!-- Dropdown Trigger -->
+<!-- <a class='dropdown-trigger cyan btn' href='#' data-target='dropdown1'>
         <i class="small material-icons">add</i>
       </a> -->
-      <!-- Dropdown Structure -->
-      <!-- <ul id='dropdown1' class='dropdown-content'>
+<!-- Dropdown Structure -->
+<!-- <ul id='dropdown1' class='dropdown-content'>
         <li>
           <a (click)="trainModel()" class="white purple-text ">Train Model </a>
           <a href="#new-project-modal" class=" white  purple-text modal-trigger puple">Create project</a>
@@ -57,46 +57,36 @@
       </div>
     </div>
   </li> -->
-  <div class="col s12 purple white-text" id="no-intents-div" [hidden] = "intents.length != 0">
+  <div class="col s12 purple white-text" id="no-intents-div" [hidden]="intents.length != 0">
     <b>No intents available start creating</b>
   </div>
+  <li class="collection-item col s12">
+    <span class="badge new badge orange left" data-badge-caption=" Intents">{{totalIntents}}</span>
+  </li>
   <li class="collection-item col s12 grey lighten-3 " *ngFor="let intent of intents  | filter : searchText;index as i;" [attr.data-index]="i">
-
     <span class="col s10">
       <a routerLink="/intentEdit/{{project}}/{{intent.intent}}">
-        <i  class=" inline-icon small material-icons cyan-text">bubble_chart</i>{{intent.intent}}
+        <i class=" inline-icon small material-icons cyan-text">bubble_chart</i>{{intent.intent}}
       </a>
     </span>
-      <span class="col s2">
+    <span class="col s2">
       <a class=" waves-effect waves-light btn-flat " (click)="deleteIntent(i)">
-          <i class=" inline-icon  material-icons ">delete_forever</i>
+        <i class=" inline-icon  material-icons ">delete_forever</i>
       </a>
-      </span>
+    </span>
   </li>
-  <li class="collection-item col s12 " [hidden]="intents.length < 10">
+  <li class="collection-item col s12 " [hidden]="intents.length < maxRecords">
     <ul class="pagination right">
-      <li class="disabled">
-        <a href="#!">
+      <li [ngClass]="{'disabled none-cursor' : pno < 2}">
+        <a (click)="initializeIntentList(pno-1)" class="pointer">
           <i class="material-icons">chevron_left</i>
         </a>
       </li>
-      <li class="active-purple">
-        <a href="#!">1</a>
+      <li *ngFor="let page of pages">
+        <a (click)="initializeIntentList(page)" class="pointer">{{page}}</a>
       </li>
-      <li class="waves-effect">
-        <a href="#!">2</a>
-      </li>
-      <li class="waves-effect">
-        <a href="#!">3</a>
-      </li>
-      <li class="waves-effect">
-        <a href="#!">4</a>
-      </li>
-      <li class="waves-effect">
-        <a href="#!">5</a>
-      </li>
-      <li class="waves-effect">
-        <a href="#!">
+      <li class="waves-effect" [ngClass]="{'disabled none-cursor' : pno > pages.length -1 }">
+        <a (click)="initializeIntentList(pno+1)" class="pointer">
           <i class="material-icons">chevron_right</i>
         </a>
       </li>

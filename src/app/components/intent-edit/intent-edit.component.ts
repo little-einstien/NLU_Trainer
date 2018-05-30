@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { AfterViewInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { DataHandlerService } from '../../services/data-handler.service';
 import * as M from 'materialize-css';
 import * as _ from 'lodash';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-intent-edit',
   templateUrl: './intent-edit.component.html',
   styleUrls: ['./intent-edit.component.css']
 })
 export class IntentEditComponent implements OnInit, AfterViewInit {
+  @ViewChildren('texts') tlist: QueryList<any>;
+  @ViewChildren('responses') rlist: QueryList<any>;
   sample = {};
+  sampresponses = {};
   projid = '';
   show = false;
-  constructor(private route: ActivatedRoute, private dataHandlerService: DataHandlerService) {
+  constructor(private route: ActivatedRoute, private dataHandlerService: DataHandlerService,private spinner :NgxSpinnerService) {
+    this.spinner.show();
     this.route.params.subscribe(params => {
-      console.log(params);
       if (params.projid) {
         this.projid = params.projid;
       }
@@ -29,6 +33,9 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+  ngForRendered() {
+    M.FormSelect.init(document.querySelectorAll('select'),{});
   }
   saveIntent() {
     debugger;
@@ -55,6 +62,9 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
 
   ngOnInit() { }
   ngAfterViewInit() {
+    this.tlist.changes.subscribe(t => {
+      this.spinner.hide();
+    });
     var elem = document.querySelector('.collapsible.expandable');
     var instance = M.Collapsible.init(elem, {
       accordion: false

@@ -1,10 +1,10 @@
 <div id="intent-list-wrapper">
-  <ul id="slide-out" class=" sidenav sidenav-fixed ">
+  <ul id="slide-out" class=" sidenav sidenav-fixed text-color-1">
     <ul class="collection with-header side-main">
       <li class="collection-header center-align ">
         <!-- <i class=" material-icons black-text white-text ">all_inclusive</i> -->
         <img src="assets/images/logo.png" alt="" height="200px" width="200px" class=" responsive-img "> <!-- notice the "circle" class -->
-        <a routerLink="/" routerLinkActive="active"><span class="f-20">PICASI CREATOR</span></a>
+        <a routerLink="/intentList/{{project.id}}" routerLinkActive="active"><span class="f-20">PICASI CREATOR</span></a>
       </li>
       <li class="collection-item grey lighten-3 " id ="project-select" >
           <div class="input-field">
@@ -13,7 +13,7 @@
                 </select> 
                 <!-- <span><i class="material-icons cyan-text">configuration</i></span> -->
             </div>          
-            <span class="project-setting"><a routerLink="settings/{{project.id}}" routerLinkActive="active" ><i class=" material-icons black-text ">settings</i></a></span>
+            <span class="project-setting pointer"><a (click)="projectSetting()" ><i class=" material-icons black-text ">settings</i></a></span>
         </li>
       <li class="collection-item grey lighten-3" >
         <div>Intents<a routerLink="/intentList/{{project.id}}" routerLinkActive="active" href="#!" class="secondary-content "><i class="material-icons cyan-text">chevron_right</i></a></div>

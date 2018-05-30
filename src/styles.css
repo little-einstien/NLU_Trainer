@@ -94,8 +94,21 @@ display: inline-block;
 h1, h2, h3, h4, h5, h6 {
     color: #002037;
 }
+.text-color-1{
+    color: #002037;
+}
 
 .border-1-solid{
 border: 1px #e0e4e7 solid;
 }
 
+.pointer {cursor: pointer;}
+.none-cursor{cursor: none;}
+.pagination li.disabled a {
+    cursor: no-drop !important;
+    color: #999 !important;
+}
+
+.margin-l-10{
+    margin-left: 10px;
+}

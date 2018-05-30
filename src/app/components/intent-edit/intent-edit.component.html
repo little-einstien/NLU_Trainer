@@ -33,7 +33,7 @@
           <li class="collection-item col s12 " *ngFor="let intent of intents "><div>{{intent.intent}}<a routerLink="/intentEdit/{{intent.intent}} " class="secondary-content "><i class="material-icons black-text ">chevron_right</i></a></div></li>
         </ul> -->
         <ul class="collection border-none" [hidden]="texts.length < 0">
-          <li *ngFor="let text of texts; index as i;" [attr.data-index]="i" class="collection-item ">
+          <li #texts  *ngFor="let text of texts; index as i;" [attr.data-index]="i" class="collection-item ">
             <blockquote class="text-select" (mouseup)="setHighlightedText(i)">{{text.value}}
               <a class="btn-flat right"><i (click)="editTxt(text.value,i)"   data-position="top" data-tooltip="Edit text" class="tooltipped material-icons">edit</i></a>
               <a class="btn-flat right"><i (click) = "text.show = !text.show"  class="material-icons">add</i></a>

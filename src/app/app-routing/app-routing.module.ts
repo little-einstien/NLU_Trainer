@@ -9,14 +9,16 @@ import { AppComponent } from '../app.component';
 import { IntegrationComponent } from '../components/integration/integration.component';
 import { NewProjectComponent } from '../components/new-project/new-project.component';
 import { ProjectSettingComponent } from '../components/project-setting/project-setting.component';
+import { ProjectListComponent } from '../components/project-list/project-list.component';
 
 
 
 const routes : Routes = [
   {path:'intentList',component:IntentListComponent},
   {path:'newproj',component:NewProjectComponent},
-  {path:'setting/:projectid',component:ProjectSettingComponent},
+  {path:'settings/:projectid',component:ProjectSettingComponent},
   {path:'intentList/:projectid',component:IntentListComponent},
+  // {path:'intentList/:projectid',component:ProjectListComponent},
   //{path:'intentList',component:IntentListComponent,resolve:{intent : IntentListResolve}},
   {path:'',component:IntentListComponent},
   {path:'integration',component:IntegrationComponent},
