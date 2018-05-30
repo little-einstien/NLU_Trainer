@@ -106,7 +106,6 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
 li.active {
     padding: 0px 0px;
-    border: 1px solid rgba(0,0,0,.5);
 }
 .user-say {
     padding: 10px;
@@ -115,7 +114,6 @@ li.active {
   margin: 0px;
 }
 .collection {
-    border: 1px solid rgba(0,0,0,.5);
     margin-bottom: 10px;
 }
 blockquote {
@@ -177,3 +175,8 @@ blockquote {
 .border-none{
   border: none;
   }
+
+.collection.with-header .collection-header {
+       Padding: 10px 0px;
+}
+
