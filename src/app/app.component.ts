@@ -10,18 +10,19 @@ import {ActivatedRoute} from "@angular/router";
 export class AppComponent {
   public message : Message;
   public messages : Message[];
-
+  public botint : boolean;
 
   constructor(private route: ActivatedRoute,private dialogflowService: DialogflowService) {
     this.route.params.subscribe( params => {
       console.log(params);
       if(params.project){
         this.dialogflowService.project = params.project;
+        this.botint = true;
       }
     });
     this.message = new Message('', 'assets/images/user.png');
     this.messages = [
-      new Message('Welcome to chatbot universe', 'assets/images/bot.png', new Date())
+      new Message('Welcome tczczxcxczxczxo chatbot universe', 'assets/images/bot.png', new Date())
     ];
   }
 }

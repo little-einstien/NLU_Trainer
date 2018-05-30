@@ -14,7 +14,6 @@ export class IntentListResolve implements Resolve<any> {
         console.log(list);
         return this.dataHandlerService.getIntentList(list[0].id).then((intents) =>{
             console.log(intents);
-            //console.log(this.side.test());
             return intents;
         });
       });

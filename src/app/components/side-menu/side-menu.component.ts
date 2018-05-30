@@ -20,11 +20,16 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   constructor(private dataHandlerService: DataHandlerService, private router: Router, private spinner: NgxSpinnerService) {
     this.spinner.show();
     this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
-      this.projectList = this.projectList.concat(list);
-      this.project = list[0];
-      this.router.navigate(['/intentList/' + this.project.id]);
-      M.FormSelect.init(document.querySelectorAll('select'), {});
-      this.spinner.hide();
+      if(list && list.length != 0 ){ 
+        this.projectList = this.projectList.concat(list);
+        this.project = list[0];
+        this.router.navigate(['/intentList/' + this.project.id]);
+        M.FormSelect.init(document.querySelectorAll('select'), {});
+        this.spinner.hide();
+      }else{
+          this.spinner.hide();
+          M.FormSelect.init(document.querySelectorAll('select'),{});
+      }
     });
   }
 
@@ -48,7 +53,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   trainModel() {
     let blockRef = this;
     this.dataHandlerService.showAlert('Training Started');
-    this.dataHandlerService.trainModel(this.project).then(function (data) {
+    this.dataHandlerService.trainModel(this.project.id).then(function (data) {
       blockRef.dataHandlerService.showAlert('Training Completed');
     }).catch(function (err) {
       console.log("Training Failed !");

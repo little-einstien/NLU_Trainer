@@ -33,7 +33,7 @@
   </li>
 </ul> -->
 <ul class="collection with-header main " id="intent-list">
-  <li class="collection-header col s12 p-l-0 valign-wrapper purple ">
+  <li class="collection-header col s12 p-l-0 valign-wrapper ">
     <span class=" left col s8 p-l-0 ">
       <div class="input-field col p-l-0 s12">
         <i class="material-icons prefix">search</i>
@@ -44,7 +44,7 @@
       <a routerLink="/intentEdit/{{project}}/" class=" cyan btn waves-effect waves-light white-text ">ADD INTENT</a>
     </span>
     <span class="right col s2 ">
-      <a routerLink="/picasi/{{project}}/" class=" cyan btn waves-effect waves-light white-text ">Picasi</a>
+      <a routerLink="/picasi/{{project}}/" routerLinkActive="active" class=" cyan btn waves-effect waves-light white-text ">Picasi</a>
     </span>
   </li>
   <!-- <li>
@@ -57,14 +57,14 @@
       </div>
     </div>
   </li> -->
-  <div class="col s12 grey lighten-3 black-text" id="no-intents-div" [hidden] = "intents.length != 0">
+  <div class="col s12 purple white-text" id="no-intents-div" [hidden] = "intents.length != 0">
     <b>No intents available start creating</b>
   </div>
-  <li class="collection-item col s12  " *ngFor="let intent of intents  | filter : searchText;index as i;" [attr.data-index]="i">
+  <li class="collection-item col s12 grey lighten-3 " *ngFor="let intent of intents  | filter : searchText;index as i;" [attr.data-index]="i">
 
     <span class="col s10">
       <a routerLink="/intentEdit/{{project}}/{{intent.intent}}">
-        <i  class=" inline-icon  purple-text small material-icons cyan-text">bubble_chart</i>{{intent.intent}}
+        <i  class=" inline-icon small material-icons cyan-text">bubble_chart</i>{{intent.intent}}
       </a>
     </span>
       <span class="col s2">
