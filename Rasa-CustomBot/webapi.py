@@ -2,6 +2,7 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 from rasa_nlu.model import Metadata, Interpreter
 from flask import jsonify
 app = Flask(__name__)
+from flask import request
 from weather import Weather, Unit
 weather = Weather(unit=Unit.CELSIUS)
 from flask_cors import CORS
@@ -28,6 +29,51 @@ def responseGenerator(projid,query):
     for data in collection.find({'intent' : response['intent']['name']}):
         pprint.pprint({'rasa_resp' : response })
         return jsonify({'rasa_resp' : response})
+
+@app.route("/api", methods=['POST'])
+def responseGeneratorWithLogging():
+    parameters = request.get_json()
+    
+    pprint.pprint("Request recived with parameters")
+    pprint.pprint(parameters)
+
+    pid = parameters['pid']
+    query = parameters['q']
+
+    db = getMongoDBConnection('chatbot_nlu_training')
+    collection = db['training_data_'+pid]
+    interpreter = Interpreter.load("F://chatbots/"+pid+"/models/nlu/default/current")
+    response = interpreter.parse(query)
+    #if bot fails the log the failure
+    if 'intent' not in response or 'name' not in response['intent'] or response['intent']['confidence'] < .50 :
+        logFailure(query,response,'hvfhjdv',pid)
+    pprint.pprint(response)
+    responseFromMongo = collection.find({'intent' : response['intent']['name']})
+    fianlResponse = {}
+    for data in responseFromMongo:
+        fianlResponse['payload'] = response
+        fianlResponse['res'] = data['response']
+        pprint.pprint(fianlResponse)
+    
+    logchat(query,fianlResponse['res'],'hvfhjdv',pid)
+    return jsonify(fianlResponse)
+
+def logchat(usermsg,botmsg,sid,pid):
+    db = getMongoDBConnection('chatbot_nlu_training')
+    collection = db['chatlog_'+pid]
+    data = {'$push':{'chat' : {'u_m':usermsg,'b_m':botmsg,'tm' : datetime.datetime.now()}}}
+    where = {'pid' : pid,'sid' : sid}
+    result = collection.update(where,data,upsert = True)
+    pprint.pprint(result)
+
+def logFailure(usermsg,botmsg,sid,pid):
+    db = getMongoDBConnection('chatbot_nlu_training')
+    collection = db['failure_'+pid]
+    data = {'$push':{'chat' : {'u_m':usermsg,'b_m':botmsg,'tm' : datetime.datetime.now()}}}
+    where = {'pid' : pid,'sid' : sid}
+    result = collection.update(where,data,upsert = True)
+    pprint.pprint(result)
+
 @app.route("/train/<string:projid>/")
 def train(projid):
     return trainbot(projid)
