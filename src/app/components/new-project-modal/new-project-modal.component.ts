@@ -15,7 +15,7 @@ export class NewProjectModalComponent implements OnInit {
   ngOnInit() {
   }
   createNewProject(){
-    this.dataHandlerService.createProject(this.project).then(()=>{
+    this.dataHandlerService.saveProject(this.project).then(()=>{
         var instance = M.Modal.getInstance(document.querySelectorAll('.modal'));
         instance.close();
     });

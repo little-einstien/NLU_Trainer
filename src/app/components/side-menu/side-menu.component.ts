@@ -5,6 +5,8 @@ import { AfterViewInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Project } from '../../models/project';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SpeechService } from '../../services/speech.service';
+
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
@@ -18,7 +20,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   projectList: Array<Project> = [this.project];
   @ViewChildren('plist') list: QueryList<any>;
   constructor(private dataHandlerService: DataHandlerService, private router: Router, 
-    private spinner: NgxSpinnerService,private zone:NgZone) {
+    private spinner: NgxSpinnerService,private zone:NgZone,private speech : SpeechService) {
     this.spinner.show();
     this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
       if(list && list.length != 0 ){ 
@@ -72,5 +74,8 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       console.log("Training Failed !");
       blockRef.dataHandlerService.showAlert('Training Failed');
     });
+  }
+  listen(){
+    this.speech.listen();
   }
 }

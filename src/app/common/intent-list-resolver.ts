@@ -12,10 +12,10 @@ export class IntentListResolve implements Resolve<any> {
     console.log("Resolver configured");
       return this.dataHandlerService.getProjectList().then((list)=>{
         console.log(list);
-        return this.dataHandlerService.getIntentList(list[0].id).then((intents) =>{
-            console.log(intents);
-            return intents;
-        });
+        // return this.dataHandlerService.getIntentList(list[0].id).then((intents) =>{
+        //     console.log(intents);
+        //     return intents;
+        // });
       });
   }
 }

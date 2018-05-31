@@ -21,6 +21,7 @@ import { ProjectSettingComponent } from './components/project-setting/project-se
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+
  
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,ClipboardModule,NgxSpinnerModule
+    HttpClientModule,ClipboardModule,NgxSpinnerModule 
   ],
   providers: [],
   bootstrap: [SideMenuComponent]

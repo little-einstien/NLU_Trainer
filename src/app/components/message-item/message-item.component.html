@@ -1,32 +1,8 @@
-<li class="list-group-item col p-10 m-b-10">
-  <img [src]="message.avatar" class="avatar col s2"/>
-  
-  <!-- Modal Trigger -->
-  <a [hidden] = "message.type == 'bot'"class="waves-effect waves-light btn modal-trigger" href="#rawrespmodal">Modal</a>
-
-  <div class="message">
-    {{message.content}}
-    <pre><code class="json orange-text">{{message.rawresp | json }}</code></pre>    
+<li class="list-group-item col s12 p-10 m-b-10 {{message.type}}">
+  <img [src]="message.avatar" class="avatar col s2 m-l-0"/>
+  <div class="message orange-text">
+    <span class="black-text">{{message.content}}</span>
+    
+    
   </div>
-  <!-- <div class="timeform">
-    <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">at {{message.timestamp | date : 'dd/MM/yyyy' }}</span>
-  </div> -->
 </li>
-  <!-- Modal Structure -->
-  <div id="rawrespmodal" class="modal">
-      <div class="modal-content ">
-          <h4>Copy follwoing code to add bot in your website{{message.rawresp | json}}</h4>
-          <div id="code-div" class="grey lighten-3">
-            <a  (click)="copyToClipboard(tta)" class=" right waves-effect waves-purple btn-flat" >
-              <i class="material-icons">content_copy</i>  
-            </a>
-            <div >
-                <pre><code class="json orange-text">{{message.rawresp|json}}</code></pre>
-              <!-- <input id="cin" disabled value={{code}} type="text" class="validate" /> -->
-            </div>
-          </div>
-          <div class="modal-footer grey lighten-3">
-            <a class="modal-close waves-effect waves-purple btn-flat">Cancel</a>
-          </div>
-        </div>
-  </div>

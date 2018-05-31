@@ -57,11 +57,9 @@
       </div>
     </div>
   </li> -->
-  <div class="col s12 purple white-text" id="no-intents-div" [hidden]="intents.length != 0">
-    <b>No intents available start creating</b>
-  </div>
   <li class="collection-item col s12">
-    <span class="badge new badge orange left" data-badge-caption=" Intents">{{totalIntents}}</span>
+    <span  [hidden]="intents.length == 0" class=" badge new badge orange left badge-updated " data-badge-caption=" Intents">{{totalIntents}}</span>
+    <span  [hidden]="intents.length != 0" class=" badge new badge orange left badge-updated " data-badge-caption=" No intents available start creating"></span>
   </li>
   <li class="collection-item col s12 grey lighten-3 " *ngFor="let intent of intents  | filter : searchText;index as i;" [attr.data-index]="i">
     <span class="col s10">

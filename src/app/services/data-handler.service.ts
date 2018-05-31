@@ -5,7 +5,6 @@ import { Intent } from '../models/intent';
 import * as M from 'materialize-css';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs';
-import { SIGUSR1 } from 'constants';
 const FAILURE = "failure";
 const SUCCESS = "success";
 

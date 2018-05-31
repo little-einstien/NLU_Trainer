@@ -57,3 +57,11 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
   padding:20px;
   text-align: center;
 }
+.badge-updated{
+  padding-left: 10px;
+  border-radius: 4px 4px 4px 30px !important;
+  box-shadow: 0 12px 24px 0 rgba(52, 73, 94, 0.1);
+  font-size: 15px !important;
+  font-weight: bold !important;
+
+}
