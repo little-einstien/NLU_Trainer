@@ -14,8 +14,8 @@ const SUCCESS = "success";
 })
 export class DataHandlerService {
   private subject = new Subject<any>();
-  // apiRoot: string = "http://35.200.131.47:3000";
-  apiRoot: string = "http://localhost:3000";
+  apiRoot: string = "http://35.200.131.47:3000";
+  //apiRoot: string = "http://localhost:3000";
   projectList: Array<Project>;
   intents: Array<Intent>;
   project;
