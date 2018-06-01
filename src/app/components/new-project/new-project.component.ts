@@ -20,7 +20,7 @@ export class NewProjectComponent implements OnInit {
         this.spinner.hide();
         this.dataHandlerService.showAlert('Sorry ! Project with same name allready exists');
       }else{
-        this.dataHandlerService.saveProject(this.project).then(()=>{
+        this.dataHandlerService.createProject(this.project).then(()=>{
           blockRef.dataHandlerService.showAlert('Project Created Succesfully');
           blockRef.resetData();
           console.log("project created");this.dataHandlerService.showAlert('Project created');
