@@ -30,6 +30,7 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
         this.dataHandlerService.getIntentDetails(this.projid, this.intent).then((data) => {
           this.texts = data['text'];
           this.responses = data['response'];
+          this.spinner.hide();
         });
       }else{
         this.spinner.hide();
