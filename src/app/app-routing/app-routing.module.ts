@@ -21,7 +21,7 @@ const routes : Routes = [
   // {path:'intentList/:projectid',component:ProjectListComponent},
   //{path:'intentList',component:IntentListComponent,resolve:{intent : IntentListResolve}},
   {path:'',component:IntentListComponent},
-  {path:'integration',component:IntegrationComponent},
+  {path:'integration/:pid',component:IntegrationComponent},
   {path:'intentEdit/:projid/:intent',component:IntentEditComponent},
   {path:'intentEdit/:projid',component:IntentEditComponent},
   {path:'intentEdit',component:IntentEditComponent},

@@ -41,7 +41,24 @@
     </ul>
   </ul>
 </div>
-<app-integration></app-integration>
+<!-- <app-integration [p] = "project.id" ></app-integration> -->
+<div id="modal1" class="modal white">
+    <div class="modal-content ">
+      <h4>Copy follwoing code to add bot in your website</h4>
+      <div id="code-div" class="grey lighten-3">
+        <a  (click)="copyToClipboard(tta)" class=" right waves-effect waves-grey btn-flat" >
+          <i class="material-icons">content_copy</i>  
+        </a>
+        <div class="input-field">
+            <textarea  readonly #tta  class="materialize-textarea trans-select" >{{codePrefix}}"{{ project.id}}" src="{{chatbotDomain}}{{ codeSuffix}}</textarea>
+          <!-- <input id="cin" disabled value={{code}} type="text" class="validate" /> -->
+        </div>
+      </div>
+      <div class="modal-footer grey lighten-3">
+        <a class="modal-close waves-effect waves-grey btn-flat">Cancel</a>
+      </div>
+    </div>
+  </div>
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="cyan" type="ball-elastic-dots"></ngx-spinner>
 <div class="fixed-action-btn" style="outline: none;">
     <a class="btn-floating btn-large ">

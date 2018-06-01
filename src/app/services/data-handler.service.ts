@@ -4,6 +4,7 @@ import { Project } from '../models/project';
 import { Intent } from '../models/intent';
 import * as M from 'materialize-css';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 const FAILURE = "failure";
 const SUCCESS = "success";
@@ -13,8 +14,10 @@ const SUCCESS = "success";
   providedIn: 'root'
 })
 export class DataHandlerService {
+  private messageSource = new BehaviorSubject(new Project('',0,''));
+  currentMessage = this.messageSource.asObservable();
   private subject = new Subject<any>();
-  apiRoot: string = "http://35.200.131.47:3000";
+   apiRoot: string = "http://35.200.131.47:3000";
   //apiRoot: string = "http://localhost:3000";
   projectList: Array<Project>;
   intents: Array<Intent>;
@@ -178,4 +181,8 @@ export class DataHandlerService {
       });
     });
   }
+  changeMessage(project: Project) {
+    this.messageSource.next(project);
+  }
+
 }

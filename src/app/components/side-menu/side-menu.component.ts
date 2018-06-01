@@ -18,26 +18,17 @@ import { SpeechService } from '../../services/speech.service';
 export class SideMenuComponent implements OnInit, AfterViewInit {
   project: Project = new Project("Create Project", 1, '-1');
   projectList: Array<Project> = [this.project];
+  chatbotDomain = 'http://localhost:3000';
+  codePrefix = '<script type="text/javascript" id = "bot-script" data-project = ';
+  codeSuffix = '/plugin/js/chatBotWidget.js"></script>';
   @ViewChildren('plist') list: QueryList<any>;
   constructor(private dataHandlerService: DataHandlerService, private router: Router, 
     private spinner: NgxSpinnerService,private zone:NgZone,private speech : SpeechService) {
-    this.spinner.show();
-    this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
-      if(list && list.length != 0 ){ 
-        this.projectList = this.projectList.concat(list);
-        this.project = list[0];
-        console.log("init");
-        this.zone.run( () => this.router.navigate(['/intentList/' + this.project.id]));
-        M.FormSelect.init(document.querySelectorAll('select'), {});
-        this.spinner.hide();
-      }else{
-          this.spinner.hide();
-          M.FormSelect.init(document.querySelectorAll('select'),{});
-      }
-    });
+    
   }
 
   ngAfterViewInit() {
+    
     M.Modal.init(document.querySelectorAll('.modal'), {});
     M.Modal.init(document.querySelectorAll('.tooltipped'), {});
     M.Modal.init(document.querySelectorAll('.fixed-action-btn'), {direction: 'left'});
@@ -48,7 +39,24 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   ngForRendered() {
     M.FormSelect.init(document.querySelectorAll('select'),{});
   }
-  ngOnInit() { }
+  ngOnInit() { 
+    this.spinner.show();
+    this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
+      if(list && list.length != 0 ){ 
+        this.projectList = this.projectList.concat(list);
+        this.project = list[0];
+        this.dataHandlerService.changeMessage(this.project);
+        console.log("init");
+        this.zone.run( () => this.router.navigate(
+          ['/intentList/' + this.project.id]));
+        M.FormSelect.init(document.querySelectorAll('select'), {});
+        this.spinner.hide();
+      }else{
+          this.spinner.hide();
+          M.FormSelect.init(document.querySelectorAll('select'),{});
+      }
+    });
+  }
   projectChange() {
     if (this.project.id == "-1") {
       this.router.navigate(['/newproj']);
@@ -79,5 +87,12 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   }
   listen(){
     this.speech.listen();
+  }
+  
+  copyToClipboard(copyText) {
+    //let copyText = document.getElementById("tta");
+    copyText.select();
+    document.execCommand("copy");
+    M.toast('I am a toast!', 1000);
   }
 }

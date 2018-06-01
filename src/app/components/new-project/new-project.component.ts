@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataHandlerService } from '../../services/data-handler.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import * as M from 'materialize-css';
 @Component({
   selector: 'app-new-project',
   templateUrl: './new-project.component.html',
@@ -11,6 +11,7 @@ export class NewProjectComponent implements OnInit {
   project = {nickname:'',tts:false,stt:false}
   constructor(private dataHandlerService: DataHandlerService,private spinner : NgxSpinnerService) { }
   ngOnInit() {
+    
   }
   createNewProject(){
     let blockRef = this;
