@@ -89,8 +89,8 @@ export class DataHandlerService {
           'Content-Type': 'application/json'
         })
       };
-      //let url = 'http://localhost:4203/train/' + projid;
-      let url = 'http://35.200.131.47:4203/train/' + projid;
+      //let url = 'http://localhost:4205/train/' + projid;
+      let url = 'http://35.200.131.47:4205/train/' + projid;
       
       try {
         this.http.get(url).subscribe(res => {
