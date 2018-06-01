@@ -31,6 +31,8 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
           this.texts = data['text'];
           this.responses = data['response'];
         });
+      }else{
+        this.spinner.hide();
       }
     });
   }
