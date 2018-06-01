@@ -20,7 +20,7 @@ export class AppComponent {
         this.botint = true;
       }
     });
-    this.message = new Message('', 'assets/images/user.png','user',new Date(),{});
+    this.message = new Message('', 'assets/images/user.png','user',new Date());
     this.messages = [
       new Message('Welcome chatbot universe', 'assets/images/bot.png', 'bot', new Date())
     ];
