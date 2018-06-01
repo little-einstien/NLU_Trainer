@@ -44,6 +44,7 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     debugger;
     this.filterText(this.texts).then((_texts: Array<any>) => {
       this.dataHandlerService.saveIntent({ "proj_id": this.projid, "old_intent": this.intentOld, "updated_intent": this.intent, "texts": _texts, "responses": this.responses });
+      this.intentOld = this.intent;
       this.dataHandlerService.showAlert('Intent Saved Succefully');
     })
   }
