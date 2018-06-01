@@ -39,6 +39,8 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     M.Modal.init(document.querySelectorAll('.modal'), {});
+    M.Modal.init(document.querySelectorAll('.tooltipped'), {});
+    M.Modal.init(document.querySelectorAll('.fixed-action-btn'), {direction: 'left'});
     this.list.changes.subscribe(t => {
       this.ngForRendered();
     })

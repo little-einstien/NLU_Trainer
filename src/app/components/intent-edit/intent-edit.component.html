@@ -8,7 +8,7 @@
           </div>
         </li>
         <li class="col s2">
-          <a class="cyan btn waves-effect waves-light" (click)="saveIntent()">SAVE</a>
+          <a class=" btn waves-effect waves-light" (click)="saveIntent()">SAVE</a>
         </li>
       </ul>
     </div>
@@ -25,7 +25,7 @@
               <input (mouseup)="setHighlightedTextFromInput()" placeholder="What will user say" [(ngModel)]="text" id="text" type="text" class="validate">
             </div>
             <div class="col s2 center m-t-5">
-              <a class="cyan btn waves-effect waves-light" (click)="addText()">ADD</a>
+              <a class=" btn waves-effect waves-light" (click)="addText()">ADD</a>
             </div>
           </li>
         </ul>
@@ -62,7 +62,7 @@
 
                       </tbody>
                     </table>
-                    <div [hidden] ="!text.highlightedText"><a class="waves-effect waves-light btn-small purple" (click) = "showEntityPopup(i)" >Add an entity for "{{text.highlightedText}}"</a></div>
+                    <div [hidden] ="!text.highlightedText"><a class="waves-effect waves-light btn-small " (click) = "showEntityPopup(i)" >Add an entity for "{{text.highlightedText}}"</a></div>
                     <div [hidden] ="text.highlightedText"><a class="waves-effect waves-light btn-small disabled "  >Select some text for adding entity</a></div>
                   </li>
 

@@ -30,17 +30,36 @@
             <i class="material-icons cyan-text left">edit</i>
           Integration<a class="waves-effect waves-light modal-trigger secondary-content " href="#modal1"><i class="material-icons cyan-text">chevron_right</i></a></div>
       </li>
-      <li class="collection-item grey lighten-3">
-          <a (click)="trainModel()" class="cyan btn">Train Model </a>
+      <!-- <li class="collection-item grey lighten-3"> -->
+          <!-- <a (click)="trainModel()" class="cyan btn">Train Model </a> -->
           <!--  <a href="#new-project-modal" class="cyan  btn modal-trigger puple">Create project</a> -->
-        </li>
-        <li class="collection-item grey lighten-3">
-            <a (click)="listen()" class="cyan btn">Speech </a>
+        <!-- </li> -->
+        <!-- <li class="collection-item grey lighten-3"> -->
+            <!-- <a (click)="listen()" class="cyan btn">Speech </a> -->
             <!--  <a href="#new-project-modal" class="cyan  btn modal-trigger puple">Create project</a> -->
-          </li>
+          <!-- </li> -->
     </ul>
   </ul>
 </div>
 <app-integration></app-integration>
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="cyan" type="ball-elastic-dots"></ngx-spinner>
+<div class="fixed-action-btn" style="outline: none;">
+    <a class="btn-floating btn-large ">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li
+      ><a routerLink="/picasi/{{project.id}}/"  routerLinkActive="active"  class="btn-floating orange darken-1 ">
+        <i class="material-icons">chat_bubble_outline</i>
+      </a>
+    </li>
+      <li>
+        <a (click) = "trainModel()"  class=" btn-floating red ">
+          <i class="material-icons">loop</i>
+        </a>
+      </li>
+      
+       
+    </ul>
+  </div>
 <router-outlet></router-outlet>
