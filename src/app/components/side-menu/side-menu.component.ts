@@ -81,6 +81,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     this.dataHandlerService.trainModel(this.project.id).then(function (data) {
       blockRef.dataHandlerService.showAlert('Training Completed');
     }).catch(function (err) {
+      console.log(err);
       console.log("Training Failed !");
       blockRef.dataHandlerService.showAlert('Training Failed');
     });

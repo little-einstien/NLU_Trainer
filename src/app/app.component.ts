@@ -22,7 +22,7 @@ export class AppComponent {
     });
     this.message = new Message('', 'assets/images/user.png','user',new Date());
     this.messages = [
-      new Message('Welcome chatbot universe', 'assets/images/bot.png', 'bot', new Date())
+      new Message('Hi I am your assitant', 'assets/images/bot.png', 'bot', new Date())
     ];
   }
 }

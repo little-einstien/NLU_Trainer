@@ -17,8 +17,8 @@ export class DataHandlerService {
   private messageSource = new BehaviorSubject(new Project('',0,''));
   currentMessage = this.messageSource.asObservable();
   private subject = new Subject<any>();
-   apiRoot: string = "http://35.200.131.47:3000";
-  //apiRoot: string = "http://localhost:3000";
+  // apiRoot: string = "http://35.200.131.47:3000";
+  apiRoot: string = "http://localhost:3000";
   projectList: Array<Project>;
   intents: Array<Intent>;
   project;
@@ -89,8 +89,8 @@ export class DataHandlerService {
           'Content-Type': 'application/json'
         })
       };
-      //let url = 'http://localhost:4205/train/' + projid;
-      let url = 'http://35.200.131.47:4205/train/' + projid;
+      let url = 'http://localhost:4203/train/' + projid;
+      //let url = 'http://35.200.131.47:4205/train/' + projid;
       
       try {
         this.http.get(url).subscribe(res => {
@@ -112,7 +112,7 @@ export class DataHandlerService {
       };
       let url = this.apiRoot + '/createproject';
       this.http.post(url, project, httpOptions).subscribe(res => {
-        resolve(res);
+        resolve(res['pid  ']);
       });
     });
   }

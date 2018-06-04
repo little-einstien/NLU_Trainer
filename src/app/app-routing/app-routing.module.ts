@@ -10,11 +10,13 @@ import { IntegrationComponent } from '../components/integration/integration.comp
 import { NewProjectComponent } from '../components/new-project/new-project.component';
 import { ProjectSettingComponent } from '../components/project-setting/project-setting.component';
 import { ProjectListComponent } from '../components/project-list/project-list.component';
+import { ConversationFlowComponent } from '../components/conversation-flow/conversation-flow.component';
 
 
 
 const routes : Routes = [
   {path:'intentList',component:IntentListComponent},
+  {path:'flow',component:ConversationFlowComponent},
   {path:'newproj',component:NewProjectComponent},
   {path:'settings/:projectid',component:ProjectSettingComponent},
   {path:'intentList/:projectid',component:IntentListComponent},

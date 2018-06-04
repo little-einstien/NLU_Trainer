@@ -20,6 +20,7 @@ import { NewProjectComponent } from './components/new-project/new-project.compon
 import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ConversationFlowComponent } from './components/conversation-flow/conversation-flow.component';
 
 
  
@@ -42,7 +43,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     IntentEditComponent,
     IntegrationComponent,
     NewProjectComponent,
-    ProjectSettingComponent
+    ProjectSettingComponent,
+    ConversationFlowComponent
   ],
   imports: [
     BrowserModule,
