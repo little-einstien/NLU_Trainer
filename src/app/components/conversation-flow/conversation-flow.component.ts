@@ -12,7 +12,7 @@ export class ConversationFlowComponent implements OnInit {
   layout = [];
   ngOnInit() {
     var nodes = new DataSet([
-      { id: 1, label: 'NodeNodeN o deNodeNodeN o d e N od e N o d e N o  d e N o d e N o d e N o d e NodeN o d e N  od e N  o d e N o d e N o d e N o d e N o d e N  o d e N o d e N o d e N o  d e N o  d e N o d e N o d e N o d e '   , shape: 'box'  },
+      { id: 1, label: 'Node 1'   , shape: 'box'  },
       { id: 2, label: 'Node 2',shape: 'box'},
       { id: 3, label: 'Node 3',shape: 'box'  },
       { id: 4, label: 'Node 4',shape: 'box'  },
