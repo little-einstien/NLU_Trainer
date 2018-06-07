@@ -184,5 +184,26 @@ export class DataHandlerService {
   changeMessage(project: Project) {
     this.messageSource.next(project);
   }
-
+ getFlow(pid){
+  return new Promise((resolve, reject) => {
+    this.http.get(this.apiRoot + '/api/flows/'+pid).subscribe(res => {
+      if(res['status'] == SUCCESS){
+        resolve(res['data'][0]);
+      }
+    });
+  });
+ }
+ saveFlow(details) {
+  return new Promise((resolve, reject) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    let url = this.apiRoot + '/api/flows';
+    this.http.post(url, details, httpOptions).subscribe(res => {
+      resolve(res);
+    });
+  });
+}
 }

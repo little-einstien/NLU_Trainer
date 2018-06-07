@@ -1,1 +1,20 @@
-<div class="main mynetwork" #mynetwork></div>
+<div class="main">
+  <div class=" mynetwork" #mynetwork></div>
+  <a class=" btn waves-effect waves-light" (click)="saveFlow()">Save Flow</a>
+</div>
+<!-- Modal Structure -->
+<div #newnodemodal class="modal">
+  <div class="modal-content">
+    <h4>Add Question</h4>
+    <div class="row">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Placeholder" [(ngModel)]="question" type="text" class="validate">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a (click)="addQuestion()" class="modal-close waves-effect waves-green btn-flat">Save</a>
+  </div>
+</div>
