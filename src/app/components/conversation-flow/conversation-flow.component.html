@@ -1,20 +1,48 @@
 <div class="main">
+  <a class=" btn waves-effect waves-light btn-top-round" (click)="saveFlow()">Save Flow</a>
   <div class=" mynetwork" #mynetwork></div>
-  <a class=" btn waves-effect waves-light" (click)="saveFlow()">Save Flow</a>
 </div>
 <!-- Modal Structure -->
 <div #newnodemodal class="modal">
   <div class="modal-content">
     <h4>Add Question</h4>
+
     <div class="row">
-      <div class="row">
-        <div class="input-field col s12">
-          <input placeholder="Placeholder" [(ngModel)]="question" type="text" class="validate">
-        </div>
+      <div class="input-field col s12">
+        <input placeholder="Description" [(ngModel)]="node.label" type="text" class="validate">
       </div>
+    </div>
+    <!-- <div class="row">
+      <div class="input-field col s6">
+        <input [(ngModel)] = "this.node.color" [value]="color" [(colorPicker)]="color" [cpAlphaChannel]='disabled' [cpHeight]="200" [cpPosition]="'right'"
+        />
+        <label>Color</label>
+      </div>
+      <div class="input-field col s6">
+        <input [(ngModel)] = "this.node.txt_color" [(colorPicker)]="color" [cpAlphaChannel]='disabled' [cpHeight]="200" [cpPosition]="'left'" [style.background]="color"
+        />
+        <label>Text color</label>
+      </div>
+    </div> -->
+    <div class="switch">
+        <label>
+          Display as Button
+          <input [(ngModel)] = "showAsButton" type="checkbox">
+          <span class="lever"></span>
+        </label>
+      </div>
+    <div class="row" [hidden] = "!showAsButton" >
+      <div class="input-field col s12">
+        <input placeholder="Button text" [(ngModel)]="node.btn_txt" type="text" class="validate">
+      </div>
+    </div>
+
+    <div class="row">
+      <a (click)="markStartingPoint()" class=" waves-effect  btn-flat">{{this.startingNode == this.node.id ? "Remove as entry point" : "Conversation start point"}}</a>
     </div>
   </div>
   <div class="modal-footer">
     <a (click)="addQuestion()" class="modal-close waves-effect waves-green btn-flat">Save</a>
   </div>
 </div>
+

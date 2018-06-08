@@ -59,6 +59,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   }
   projectChange() {
     if (this.project.id == "-1") {
+      this.dataHandlerService.changeMessage(this.project);
       this.router.navigate(['/newproj']);
       return;
     }

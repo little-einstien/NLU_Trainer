@@ -9,20 +9,26 @@ import { DataHandlerService } from '../../services/data-handler.service';
 })
 export class ConversationFlowComponent implements OnInit {
   structure = {};
-  node;
-  question = '';
+  startingNode ; 
+  node = {id :'',label:'',color:'',txt_color :'',btn_txt:''};
+  msg = '';
+  btnTxt = '';
+  btnClr = 'blue';
+  txtColor = 'white-text';
   network;
   nodes = new DataSet([]);
   edges = new DataSet([]);
+  project;
   @ViewChild('mynetwork') mynetwork: ElementRef;
   @ViewChild('newnodemodal') newnodemodal: ElementRef;
   constructor(private dataService: DataHandlerService) {
-    this.dataService.getFlow("2323").then((data: any) => {
+    this.dataService.currentMessage.subscribe(project => this.project = project)
+    this.dataService.getFlow(this.project.id).then((data: any) => {
       debugger;
        if(data.flow.nodes)
-        this.nodes = new DataSet(data.flow.nodes);
+        this.nodes = new DataSet(Object.values(data.flow.nodes));
       if(data.flow.edges)
-        this.edges = new DataSet(data.flow.edges);
+        this.edges = new DataSet(Object.values(data.flow.edges));
       // for (var i = 0; i < data.flow.length; i++) {
       //   this.nodes.add({ id: data.flow[i].nid, label: data.flow[i].text });
       //   if (data.flow[i].children) {
@@ -34,8 +40,13 @@ export class ConversationFlowComponent implements OnInit {
       //     this.intialize();
       //   }
       // }
+      setTimeout(() => {
+        this.intialize();
+      },250);
+    });
+    setTimeout(() => {
       this.intialize();
-    })
+    },250);
   }
   ngOnInit() { }
   intialize() {
@@ -92,7 +103,7 @@ export class ConversationFlowComponent implements OnInit {
     this.network.setOptions(options);
     this.network.on('doubleClick', (params) => {
       if (params.nodes.length != 0) {
-        this.node = params.nodes[0];
+        this.node = this.nodes._data[params.nodes[0]];
         M.Modal.getInstance(this.newnodemodal.nativeElement).open();
         //this.addConversationNode(this.network.getSelectedNodes());
       }
@@ -129,13 +140,14 @@ export class ConversationFlowComponent implements OnInit {
   addConversationNode(nodes) {
     if (nodes.length != 0) {
       for (let i = 0; i < nodes.length; i++) {
-        this.node = nodes[i];
+        this.node = this.nodes._data.nodes[i];
         this.structure[nodes[i]] = {nid : nodes[i]};
       }
     }
   }
   addQuestion() {
-    this.nodes.update([{ id: this.node, label: this.question }]);
+    this.nodes.update([this.node]);
+    this.msg = '';
 //    this.structure[this.node].text = this.question;
   //  console.log(this.structure);
   }
@@ -149,12 +161,21 @@ export class ConversationFlowComponent implements OnInit {
     }
   }
   saveFlow(){
-    this.dataService.saveFlow({pid:"2323",flow:{nodes:this.nodes._data,edges:this.edges._data}}).then((result)=>{
+    this.dataService.currentMessage.subscribe(project => this.project = project);
+    this.dataService.saveFlow({pid:this.project.id,sp: this.startingNode,flow:{nodes:this.nodes._data,edges:Object.values(this.edges._data)}}).then((result)=>{
       if(result['status'] == 'success'){
         alert('saved');
       }else{
         alert('failed');
       }
     })
+  }
+  markStartingPoint(){
+    if(this.startingNode == this.node.id){
+      this.startingNode = '';
+    }else{
+      this.startingNode = this.node.id;
+    }
+
   }
 }

@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AppRoutingModule,routingComponents } from './app-routing/app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReportingComponent } from './reporting/reporting.component';
 import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts'; // this is needed!
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipe} from './common/filter.pipe';
+import { FilterPipe } from './common/filter.pipe';
 import { NewProjectModalComponent } from './components/new-project-modal/new-project-modal.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
@@ -21,9 +21,9 @@ import { ProjectSettingComponent } from './components/project-setting/project-se
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConversationFlowComponent } from './components/conversation-flow/conversation-flow.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
- 
 @NgModule({
   declarations: [
     SideMenuComponent,
@@ -50,7 +50,7 @@ import { ConversationFlowComponent } from './components/conversation-flow/conver
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,ClipboardModule,NgxSpinnerModule 
+    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule
   ],
   providers: [],
   bootstrap: [SideMenuComponent]

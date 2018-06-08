@@ -33,6 +33,7 @@
     "loadash": "^1.0.0",
     "materialize-css": "^1.0.0-rc.1",
     "ngx-clipboard": "^11.1.0",
+    "ngx-color-picker": "^6.3.3",
     "ngx-scrollbar": "^2.1.0",
     "ngx-speech": "0.0.4",
     "ngx-spinner": "^6.0.0",
