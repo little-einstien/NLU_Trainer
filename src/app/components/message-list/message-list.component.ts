@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Message } from '../../models/message';
 import { MessageItemComponent } from '../message-item/message-item.component';
 import * as M from 'materialize-css';
+import { ScrollbarComponent } from 'ngx-scrollbar';
    
 @Component({
   selector: 'message-list',
@@ -10,9 +11,10 @@ import * as M from 'materialize-css';
 })
 export class MessageListComponent implements OnInit, AfterViewInit {
   rawresponse ;
+  @ViewChild(ScrollbarComponent) scrollRef: ScrollbarComponent;
   @Input('messages')
   private messages: Message[];
-
+  @Output() responseClick: EventEmitter<any> = new EventEmitter();
   @ViewChild('rawrespmodal', { read: ElementRef }) rawrespmodal: ElementRef;
   @ViewChild('chatlist', { read: ElementRef }) chatList: ElementRef;
   @ViewChildren(MessageItemComponent, { read: ElementRef }) chatItems: QueryList<MessageItemComponent>;
@@ -44,5 +46,9 @@ export class MessageListComponent implements OnInit, AfterViewInit {
   openRawResponseModal(i){
     this.rawresponse = this.messages[i].rawresp;
     M.Modal.getInstance(this.rawrespmodal.nativeElement).open(); 
+  }
+  getResponse($event){
+    //this.scrollRef.scrollToBottom()
+    this.responseClick.emit($event);
   }
 }

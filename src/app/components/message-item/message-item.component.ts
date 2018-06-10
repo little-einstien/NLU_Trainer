@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Message } from '../../models/message';
+
 
 
 @Component({
@@ -10,9 +11,13 @@ import { Message } from '../../models/message';
 export class MessageItemComponent implements OnInit{
   @Input('message')
   private message: Message;
+  @Output() responseClick: EventEmitter<any> = new EventEmitter();
   constructor(){
     
   }
-  
+  getResponse(id){
+    this.responseClick.emit(id);
+  }
   ngOnInit() {}
+  
 }

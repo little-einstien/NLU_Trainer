@@ -1,43 +1,66 @@
 <div class="main">
-<h4 style="padding: 0 .75rem;">Create a new picasi</h4>
-    <p style="padding: 0 .75rem;">You can create a picasi for someone here.</p>
-    <p style="padding: 0 .75rem;">Project with the same name not allowed.</p>
-    <div class="row border-1-solid">
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="nickname" [(ngModel)]="project.nickname" placeholder="Nickname" type="text" class="validate">
-          </div>
-            <!-- <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select> -->
-            <!-- <input id="icon_prefix" type="text" class="validate"> -->
+  <h4 style="padding: 0 .75rem;">Create a new agent</h4>
+  <p style="padding: 0 .75rem;">You can create a agent here.
+    <br>
+    <span class="red-text">Project with the same name not allowed*</span>
+  </p>
+  <div class="row border-1-solid">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="nickname" [(ngModel)]="project.name" placeholder="Name of agent" type="text" class="validate">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="header" [(ngModel)]="project.header" placeholder="Header text" type="text" class="validate">
+      </div>
+    </div>
+    <div class="row valign-wrapper">
+      <span class="col s2">Background color</span>
+      <div class="input-field col s4">
+        <input [(colorPicker)]="project.bg_clr" [style.background]="project.bg_clr" [cpHeight]="200" [cpPosition]="'right'" id="bot-background"
+           type="text" class="validate">
+      </div>
+      <span class="col s2">Header color</span>
+      <div class="input-field col s4">
+        <input [(colorPicker)]="project.h_clr" [style.background]="project.h_clr" [cpHeight]="200" [cpPosition]="'left'" id="header"
+           type="text" class="validate">
+      </div>
+    </div>
+    <div class="row">
+        <span class="col s2">User chat bubblle color</span>
+      <div class="input-field col s4">
+        <input [(colorPicker)]="project.ucb_clr" [style.background]="project.ucb_clr" [cpHeight]="200" [cpPosition]="'right'" id="bot-background"
+           type="text" class="validate">
+      </div>
+      <span class="col s2">Bot chat bubble color</span>
+      <div class="input-field col s4">
+        <input [(colorPicker)]="project.bcb_clr" [style.background]="project.bcb_clr" [cpHeight]="200" [cpPosition]="'left'" id="header"
+           type="text" class="validate">
+      </div>
+    </div>
+    <div class="row p-l-0 ">
+      <div class="col s3 ">
+        <div class="switch">
+          <label>
+            <input [(ngModel)]="project.stt" type="checkbox">
+            <span class="lever"></span>
+            Speech to Text
+          </label>
         </div>
-        <div class="row p-l-0 ">
-          <div class="col s3 ">
-            <div class="switch">
-              <label>
-                <input [(ngModel)]="project.stt" type="checkbox">
-                <span class="lever"></span>
-                Speech to Text
-              </label>
-            </div>
-          </div>
-          <div class="col s3">
-            <div class="switch">
-              <label>
-                <input type="checkbox" [(ngModel)]="project.tts">
-                <span class="lever"></span>
-                Text to Speech
-              </label>
-            </div>
-          </div>
+      </div>
+      <div class="col s3">
+        <div class="switch">
+          <label>
+            <input type="checkbox" [(ngModel)]="project.tts">
+            <span class="lever"></span>
+            Text to Speech
+          </label>
         </div>
-        <div class= "row center">
-          <a  (click) = "createNewProject()"class="cyan btn waves-effect waves-light  ">CREATE</a>
-        </div>
+      </div>
+    </div>
+    <div class="row center">
+      <a (click)="createNewProject()" class="cyan btn waves-effect waves-light  ">CREATE</a>
     </div>
   </div>
-
+</div>

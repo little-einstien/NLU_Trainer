@@ -6,6 +6,8 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 import { Project } from '../../models/project';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpeechService } from '../../services/speech.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-side-menu',
@@ -16,62 +18,70 @@ import { SpeechService } from '../../services/speech.service';
   providedIn: 'root'
 })
 export class SideMenuComponent implements OnInit, AfterViewInit {
-  project: Project = new Project("Create Project", 1, '-1');
-  projectList: Array<Project> = [this.project];
-  chatbotDomain = 'http://localhost:3000';
-  codePrefix = '<script type="text/javascript" id = "bot-script" data-project = ';
-  codeSuffix = '/plugin/js/chatBotWidget.js"></script>';
+  // public project: Project = new Project("", 1, '');
+  public project: Project = new Project("Create Project", 1, '-1');
+  public projectList: Array<Project> = [new Project("Create Project", 1, '-1')];
+  // public projectList: Array<Project> = [];
+  public chatbotDomain = environment.bot_endpoint;
+  public codePrefix = environment.bot_script_pf;
+  public codeSuffix = environment.bot_script_sf;
+  // p = '';
+
   @ViewChildren('plist') list: QueryList<any>;
-  constructor(private dataHandlerService: DataHandlerService, private router: Router, 
-    private spinner: NgxSpinnerService,private zone:NgZone,private speech : SpeechService) {
-    
-  }
+  constructor(private dataHandlerService: DataHandlerService,
+    private router: Router,
+    private spinner: NgxSpinnerService, private zone: NgZone, private speech: SpeechService) { }
 
   ngAfterViewInit() {
-    
     M.Modal.init(document.querySelectorAll('.modal'), {});
     M.Modal.init(document.querySelectorAll('.tooltipped'), {});
-    M.Modal.init(document.querySelectorAll('.fixed-action-btn'), {direction: 'left'});
+    M.Modal.init(document.querySelectorAll('.fixed-action-btn'), { direction: 'left' });
     this.list.changes.subscribe(t => {
       this.ngForRendered();
-    })
-  }
-  ngForRendered() {
-    M.FormSelect.init(document.querySelectorAll('select'),{});
-  }
-  ngOnInit() { 
-    this.spinner.show();
-    this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
-      if(list && list.length != 0 ){ 
-        this.projectList = this.projectList.concat(list);
-        this.project = list[0];
-        this.dataHandlerService.changeMessage(this.project);
-        console.log("init");
-        this.zone.run( () => this.router.navigate(
-          ['/intentList/' + this.project.id]));
-        M.FormSelect.init(document.querySelectorAll('select'), {});
-        this.spinner.hide();
-      }else{
-          this.spinner.hide();
-          M.FormSelect.init(document.querySelectorAll('select'),{});
-      }
     });
   }
-  projectChange() {
+  ngForRendered() {
+    setTimeout(() => {M.FormSelect.init(document.querySelectorAll('select'), {classes:['_wrapper']})},250);
+  }
+  ngOnInit() {
+    this.spinner.show();
+    this.dataHandlerService.getProjectList().then((list: Array<Project>) => {
+      if (list.length != 0) {
+        // console.log(list);
+        this.project.id = list[0].id;
+        this.project.name = list[0].name;
+        this.project.status = list[0].status;
+        this.projectList = this.projectList.concat(list);
+        //this.project = list[3];
+        //M.FormSelect.init(document.querySelectorAll('select'), {})
+        // this.projectList.push(this.project);
+        // console.log(this.projectList)
+        // this.projectList = this.projectList.concat(list);
+        this.dataHandlerService.changeProject(this.project); //update project
+        this.router.navigate([`/inl`]);
+      }
+      this.spinner.hide();
+    });
+    setTimeout(() => {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {});
+    },1000);
+  }
+  projectChange(i) {
+    this.project = this.projectList[i];
+    this.dataHandlerService.changeProject(this.project);
     if (this.project.id == "-1") {
-      this.dataHandlerService.changeMessage(this.project);
       this.router.navigate(['/newproj']);
       return;
     }
-    //M.FormSelect.init(document.querySelectorAll('select'),{});
-    this.zone.run( () => this.router.navigate(['/intentList/' + this.project.id]));
+    this.router.navigate(['/inl']);
   }
-  projectSetting(){
+  projectSetting() {
     if (this.project.id == "-1") {
       this.dataHandlerService.showAlert('Please select the project');
       return;
-    }else{
-      this.router.navigate(['/settings/'+this.project.id]);      
+    } else {
+      this.router.navigate(['/settings/' + this.project.id]);
     }
   }
 
@@ -87,10 +97,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       blockRef.dataHandlerService.showAlert('Training Failed');
     });
   }
-  listen(){
+  listen() {
     this.speech.listen();
   }
-  
+
   copyToClipboard(copyText) {
     //let copyText = document.getElementById("tta");
     copyText.select();

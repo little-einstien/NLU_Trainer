@@ -1,5 +1,5 @@
-
-<div class="chatlist" #chatlist>
+<!-- <div class="chatlist" #chatlist style="height: calc(100vh - 102px);"> -->
+  <!-- <ng-scrollbar  #scrollRef [autoUpdate] = "true"> -->
   <ul class="list-group">
     <div *ngFor="let msg of messages; index as i;" [attr.data-index]="i">
       <span [hidden] = "msg.type != 'bot'"  class="rawresp">
@@ -7,10 +7,11 @@
           <i class="material-icons">open_in_new</i>  
         </a>
       </span>
-      <message-item  [message]="msg" ></message-item>
+      <message-item (responseClick) = "getResponse($event)"  [message]="msg" ></message-item>
     </div>
   </ul>
-</div>
+  <!-- </ng-scrollbar> -->
+<!-- </div> -->
 <div #rawrespmodal class="modal">
     <div class="modal-content ">
         <h4>Raw Response</h4>

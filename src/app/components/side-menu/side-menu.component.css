@@ -30,3 +30,6 @@
   padding: 20px;
   font-size: 14px;
 }
+.sidenav li>a:hover {
+  background-color: transparent !important;
+}

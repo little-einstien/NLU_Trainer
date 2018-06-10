@@ -1,0 +1,8 @@
+.card{
+    border-radius: 10px 10px !important;
+    -webkit-box-shadow: none !important;
+    background: transparent; 
+}
+.card .card-content {
+    padding: 0px !important;
+}

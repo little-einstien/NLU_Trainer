@@ -15,6 +15,36 @@
                 </select> -->
                 <!-- <input id="icon_prefix" type="text" class="validate"> -->
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <input id="header" [(ngModel)]="project.header" placeholder="Header text" type="text" class="validate">
+                </div>
+              </div>
+              <div class="row valign-wrapper">
+                <span class="col s2">Background color</span>
+                <div class="input-field col s4">
+                  <input [(colorPicker)]="project.bg_clr" [style.background]="project.bg_clr" [cpHeight]="200" [cpPosition]="'right'" id="bot-background"
+                     type="text" class="validate">
+                </div>
+                <span class="col s2">Header color</span>
+                <div class="input-field col s4">
+                  <input [(colorPicker)]="project.h_clr" [style.background]="project.h_clr" [cpHeight]="200" [cpPosition]="'left'" id="header"
+                     type="text" class="validate">
+                </div>
+              </div>
+              <div class="row">
+                  <span class="col s2">User chat bubblle color</span>
+                <div class="input-field col s4">
+                  <input [(colorPicker)]="project.ucb_clr" [style.background]="project.ucb_clr" [cpHeight]="200" [cpPosition]="'right'" id="bot-background"
+                     type="text" class="validate">
+                </div>
+                <span class="col s2">Bot chat bubble color</span>
+                <div class="input-field col s4">
+                  <input [(colorPicker)]="project.bcb_clr" [style.background]="project.bcb_clr" [cpHeight]="200" [cpPosition]="'left'" id="header"
+                     type="text" class="validate">
+                </div>
+              </div>
+              
             <div class="row p-l-0 ">
               <div class="col s3 ">
                 <div class="switch">

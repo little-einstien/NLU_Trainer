@@ -37,6 +37,6 @@ export class IntegrationComponent implements OnInit, AfterViewInit {
     M.toast('I am a toast!', 1000);
   }
   openIntegrationModal(){
-    this.dataHandlerService.currentMessage.subscribe(project => this.project = project)
+    this.dataHandlerService.currentProject.subscribe(project => this.project = project)
   }
 }

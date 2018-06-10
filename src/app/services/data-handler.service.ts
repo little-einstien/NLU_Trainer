@@ -6,40 +6,51 @@ import * as M from 'materialize-css';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
-const FAILURE = "failure";
-const SUCCESS = "success";
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataHandlerService {
-  private messageSource = new BehaviorSubject(new Project('',0,''));
-  currentMessage = this.messageSource.asObservable();
-  private subject = new Subject<any>();
-  // apiRoot: string = "http://35.200.131.47:3000";
-  apiRoot: string = "http://localhost:3000";
-  projectList: Array<Project>;
-  intents: Array<Intent>;
-  project;
-  constructor(private http: HttpClient) {
-  }
-  getIntentList(project, pno) {
+  public static FAILURE = "failure";
+  public static SUCCESS = "success";
+  private projectSource = new BehaviorSubject(new Project('', 0, ''));
+  public currentProject = this.projectSource.asObservable();
+  private intentSource = new BehaviorSubject('');
+  public currentIntent = this.intentSource.asObservable();
+  public apiRoot: string = environment.api_endpoint;
+  public nlu_ep = environment.nlu_endpoint;
+  public projectList: Array<Project>;
+  public intents: Array<Intent>;
+  public project;
+  constructor(private http: HttpClient) { }
+  
+  /**
+   * 
+   * 
+   * */  
+  getIntentList(pid, pno) {
     return new Promise((resolve, reject) => {
-      let url = this.apiRoot + '/getintents/' + project + '/' + pno;
-      this.http.get(url).subscribe(res => {
-        this.intents = res['data'];
+      let url = `${this.apiRoot}/getintents/${pid}/${pno}`;
+      this.http.get(url).subscribe((res:any) => {
+        this.intents = res.data;
         resolve(res);
       });
     });
   }
+  /**
+   * 
+   * 
+   * */
   getProjectList() {
     return new Promise((resolve, reject) => {
-      let url = this.apiRoot + '/getprojects';
-      this.http.get(url).subscribe((res: Array<Project>) => {
-        if (res.length != 0) {
-          this.project = res[0].id;
-          this.projectList = res;
+      let url = this.apiRoot + '/api/projects';
+      this.http.get(url).subscribe((res:any) => {
+        if (res.status == DataHandlerService.SUCCESS) {
+          this.project = res.data[0].id;
+          this.projectList = res.data;
         } else {
           console.log("No projects found !");
         }
@@ -47,6 +58,8 @@ export class DataHandlerService {
       });
     });
   }
+  
+  
   getIntentDetails(projectid, intent) {
     return new Promise((resolve, reject) => {
       let url = this.apiRoot + '/getintentdetails/' + projectid + '/' + intent;
@@ -82,18 +95,15 @@ export class DataHandlerService {
     });
   }
 
-  trainModel(projid) {
+  trainModel(pid) {
     return new Promise((resolve, reject) => {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       };
-      let url = 'http://localhost:4203/train/' + projid;
-      //let url = 'http://35.200.131.47:4205/train/' + projid;
-      
       try {
-        this.http.get(url).subscribe(res => {
+        this.http.get(`this.nlu_ep/${pid}`).subscribe(res => {
           resolve(res);
         }, error => {
           reject(error);
@@ -110,9 +120,9 @@ export class DataHandlerService {
           'Content-Type': 'application/json'
         })
       };
-      let url = this.apiRoot + '/createproject';
+      let url = this.apiRoot + '/api/projects';
       this.http.post(url, project, httpOptions).subscribe(res => {
-        resolve(res['pid  ']);
+        resolve(res);
       });
     });
   }
@@ -123,8 +133,8 @@ export class DataHandlerService {
           'Content-Type': 'application/json'
         })
       };
-      let url = this.apiRoot + '/saveproject';
-      this.http.post(url, project, httpOptions).subscribe(res => {
+      let url = `${this.apiRoot}/api/projects/${project.id}`;
+      this.http.put(url, project, httpOptions).subscribe(res => {
         resolve(res);
       });
     });
@@ -143,21 +153,8 @@ export class DataHandlerService {
       });
     });
   }
-
-
   showAlert(msg) {
     M.toast({ html: msg, classes: ['white-text'] }, 1000);
-  }
-  sendData(message: string) {
-    this.subject.next(message);
-  }
-
-  clearData() {
-    this.subject.next();
-  }
-
-  getData(): Observable<any> {
-    return this.subject.asObservable();
   }
   getProjectDetails(projectid) {
     return new Promise((resolve, reject) => {
@@ -166,44 +163,47 @@ export class DataHandlerService {
           'Content-Type': 'application/json'
         })
       };
-      let url = this.apiRoot + '/getprojectdetails';
-      this.http.post(url, { pid: projectid }, httpOptions).subscribe(res => {
-        if (res['status'] == SUCCESS) {
-          resolve(res['data']);
+      let url = `${this.apiRoot}/api/projects/${projectid}`;
+      this.http.get(url, httpOptions).subscribe(res => {
+        if (res['status'] == DataHandlerService.SUCCESS) {
+          resolve(res['data'][0]);
         }
       });
     });
   }
   isProjectExists(pname) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.apiRoot + '/isprojectexists/'+pname).subscribe(res => {
-        resolve(res['status'] == SUCCESS);
+      this.http.get(this.apiRoot + '/api/projects/' + pname).subscribe(res => {
+        resolve(res['status'] == DataHandlerService.SUCCESS);
       });
     });
   }
-  changeMessage(project: Project) {
-    this.messageSource.next(project);
+  changeProject(project: Project) {
+    this.projectSource.next(project);
   }
- getFlow(pid){
-  return new Promise((resolve, reject) => {
-    this.http.get(this.apiRoot + '/api/flows/'+pid).subscribe(res => {
-      if(res['status'] == SUCCESS){
-        resolve(res['data'][0]);
-      }
+  changeIntent(intent){
+    this.intentSource.next(intent);
+  }
+  getFlow(pid) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiRoot + '/api/flows/' + pid).subscribe(res => {
+        if (res['status'] == DataHandlerService.SUCCESS) {
+          resolve(res['data'][0]);
+        }
+      });
     });
-  });
- }
- saveFlow(details) {
-  return new Promise((resolve, reject) => {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    let url = this.apiRoot + '/api/flows';
-    this.http.post(url, details, httpOptions).subscribe(res => {
-      resolve(res);
+  }
+  saveFlow(details) {
+    return new Promise((resolve, reject) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      let url = `${this.apiRoot}/api/flows/${details.pid}`;
+      this.http.put(url, details, httpOptions).subscribe(res => {
+        resolve(res);
+      });
     });
-  });
-}
+  }
 }

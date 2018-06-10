@@ -11,21 +11,22 @@ import { NewProjectComponent } from '../components/new-project/new-project.compo
 import { ProjectSettingComponent } from '../components/project-setting/project-setting.component';
 import { ProjectListComponent } from '../components/project-list/project-list.component';
 import { ConversationFlowComponent } from '../components/conversation-flow/conversation-flow.component';
+import { SideMenuComponent } from '../components/side-menu/side-menu.component';
 
 
 
 const routes : Routes = [
-  {path:'intentList',component:IntentListComponent},
+  {path:'inl',component:IntentListComponent},
   {path:'flow',component:ConversationFlowComponent},
   {path:'newproj',component:NewProjectComponent},
   {path:'settings/:projectid',component:ProjectSettingComponent},
-  {path:'intentList/:projectid',component:IntentListComponent},
+  //{path:'intentList/:projectid',component:IntentListComponent},
   // {path:'intentList/:projectid',component:ProjectListComponent},
   //{path:'intentList',component:IntentListComponent,resolve:{intent : IntentListResolve}},
-  {path:'',component:IntentListComponent},
+  {path:'',component:SideMenuComponent},
   {path:'integration/:pid',component:IntegrationComponent},
-  {path:'intentEdit/:projid/:intent',component:IntentEditComponent},
-  {path:'intentEdit/:projid',component:IntentEditComponent},
+  //{path:'intentEdit/:projid/:intent',component:IntentEditComponent},
+  {path:'ine',component:IntentEditComponent},
   {path:'intentEdit',component:IntentEditComponent},
   {path:'reporting',component:ReportingComponent},
   {path:'picasi/:project',component:AppComponent},

@@ -41,7 +41,7 @@
       </div>
     </span>
     <span class="right col s2 ">
-      <a routerLink="/intentEdit/{{project}}/" class=" cyan btn waves-effect waves-light white-text ">ADD INTENT</a>
+      <a routerLink="/ine" class=" cyan-1 btn waves-effect waves-light white-text ">ADD INTENT</a>
     </span>
     <!-- <span class="right col s2 ">
       <a routerLink="/picasi/{{project}}/" routerLinkActive="active" class=" cyan btn waves-effect waves-light white-text ">Picasi</a>
@@ -63,7 +63,7 @@
   </li>
   <li class="collection-item col s12 grey lighten-3 " *ngFor="let intent of intents  | filter : searchText;index as i;" [attr.data-index]="i">
     <span class="col s10">
-      <a routerLink="/intentEdit/{{project}}/{{intent.intent}}">
+      <a (click) = "editIntent(intent.intent)" class="pointer">
         <i class=" inline-icon small material-icons cyan-text">bubble_chart</i>{{intent.intent}}
       </a>
     </span>
@@ -92,4 +92,3 @@
   </li>
 </ul>
 <app-new-project-modal></app-new-project-modal>
-<script id="chatbot-script" type="text/javascript" src="http://localhost:3000/chatbot/js/chatbot-widget.js"></script>

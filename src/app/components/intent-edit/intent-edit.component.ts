@@ -16,34 +16,44 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
   @ViewChildren('responses') rlist: QueryList<any>;
   sample = {};
   sampresponses = {};
-  projid = '';
+  samples: Array<{ intent: string, text: string, res: string }> = [];
+  myControl: FormControl = new FormControl();
+
+  text: string;
+  response: string;
+  intent: string;
+  intentOld: string;
+  options = [];
+  texts = [];
+  responses = [];
+  highlightedText = "";
+  entityName = "";
+  entityValue = "";
+  pid = '';
   show = false;
-  constructor(private route: ActivatedRoute, private dataHandlerService: DataHandlerService,private spinner :NgxSpinnerService) {
+  constructor(private route: ActivatedRoute, private dataHandlerService: DataHandlerService, private spinner: NgxSpinnerService) {
     this.spinner.show();
-    this.route.params.subscribe(params => {
-      if (params.projid) {
-        this.projid = params.projid;
-      }
-      if (params.intent) {
-        this.intent = params.intent;
-        this.intentOld = params.intent;
-        this.dataHandlerService.getIntentDetails(this.projid, this.intent).then((data) => {
-          this.texts = data['text'];
-          this.responses = data['response'];
-          this.spinner.hide();
-        });
-      }else{
+    this.dataHandlerService.currentProject.subscribe(project => this.pid = project.id);
+    if (this.pid && this.pid != '-1') {
+      this.dataHandlerService.currentIntent.subscribe(intent => this.intent = intent);
+      this.intentOld = this.intent;
+      this.dataHandlerService.getIntentDetails(this.pid, this.intent).then((data) => {
+        this.texts = data['text'];
+        this.responses = data['response'];
         this.spinner.hide();
-      }
-    });
+      });
+    } else {
+      this.spinner.hide();
+    }
+
   }
   ngForRendered() {
-    M.FormSelect.init(document.querySelectorAll('select'),{});
+    M.FormSelect.init(document.querySelectorAll('select'), {});
   }
   saveIntent() {
     debugger;
     this.filterText(this.texts).then((_texts: Array<any>) => {
-      this.dataHandlerService.saveIntent({ "proj_id": this.projid, "old_intent": this.intentOld, "updated_intent": this.intent, "texts": _texts, "responses": this.responses });
+      this.dataHandlerService.saveIntent({ "proj_id": this.pid, "old_intent": this.intentOld, "updated_intent": this.intent, "texts": _texts, "responses": this.responses });
       this.intentOld = this.intent;
       this.dataHandlerService.showAlert('Intent Saved Succefully');
     })
@@ -77,19 +87,6 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     var instances = M.Tooltip.init(elems, {});
 
   }
-  samples: Array<{ intent: string, text: string, res: string }> = [];
-  myControl: FormControl = new FormControl();
-
-  text: string;
-  response: string;
-  intent: string;
-  intentOld: string;
-  options = [];
-  texts = [];
-  responses = [];
-  highlightedText = "";
-  entityName = "";
-  entityValue = "";
 
 
 

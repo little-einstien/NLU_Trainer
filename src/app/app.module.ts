@@ -22,7 +22,13 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConversationFlowComponent } from './components/conversation-flow/conversation-flow.component';
 import { ColorPickerModule } from 'ngx-color-picker';
-
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+ 
 
 @NgModule({
   declarations: [
@@ -50,9 +56,12 @@ import { ColorPickerModule } from 'ngx-color-picker';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule
+    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule
   ],
-  providers: [],
+  providers: [ {
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  }],
   bootstrap: [SideMenuComponent]
 })
 export class AppModule { }
