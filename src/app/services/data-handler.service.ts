@@ -196,7 +196,7 @@ export class DataHandlerService {
       });
     });
   }
-  saveFlow(details) {
+  saveFlow(isNew,details) {
     return new Promise((resolve, reject) => {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -204,9 +204,15 @@ export class DataHandlerService {
         })
       };
       let url = `${this.apiRoot}/api/flows/${details.pid}`;
-      this.http.put(url, details, httpOptions).subscribe(res => {
-        resolve(res);
-      });
+      if(isNew){
+        this.http.post(url, details, httpOptions).subscribe(res => {
+          resolve(res);
+        });
+      }else{
+        this.http.put(url, details, httpOptions).subscribe(res => {
+          resolve(res);
+        });
+      }
     });
   }
 }
