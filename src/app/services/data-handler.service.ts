@@ -189,7 +189,10 @@ export class DataHandlerService {
       this.http.get(this.apiRoot + '/api/flows/' + pid).subscribe(res => {
         if (res['status'] == DataHandlerService.SUCCESS) {
           resolve(res['data'][0]);
+        }else{
+           resolve(null);
         }
+        
       });
     });
   }
