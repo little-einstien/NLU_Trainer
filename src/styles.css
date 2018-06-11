@@ -292,3 +292,7 @@ i.left {
       overflow-y: inherit;
  
 }
+.color-picker{
+  height: auto !important;
+
+}
