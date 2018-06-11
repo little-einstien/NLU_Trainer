@@ -1,36 +1,106 @@
 <div id="intent-list-wrapper">
-  <ul id="slide-out" class=" sidenav sidenav-fixed ">
+  <ul id="slide-out" class=" sidenav sidenav-fixed text-color-1">
     <ul class="collection with-header side-main">
       <li class="collection-header center-align ">
         <!-- <i class=" material-icons black-text white-text ">all_inclusive</i> -->
-        <img src="assets/images/logo.png" alt="" height="200px" width="200px" class=" responsive-img "> <!-- notice the "circle" class -->
-        <a routerLink="/" routerLinkActive="active"><span class="f-20">PICASI CREATOR</span></a>
+        <img src="assets/images/logo.png" alt="" height="200px" width="200px" class=" responsive-img ">
+        <!-- notice the "circle" class -->
+        <a routerLink="/inl" routerLinkActive="active">
+          <span class="f-20">PICASI CREATOR</span>
+        </a>
       </li>
-      <li class="collection-item grey lighten-3 " id ="project-select" >
-          <div class="input-field">
-              <select  [(ngModel)]="project.id" (ngModelChange)="projectChange($event)" class="p-l-10" aria-placeholder="Projects">
-                  <option  #plist *ngFor="let project of projectList;" value="{{project.id}}">{{project.name}}</option>
-                </select> 
-                <!-- <span><i class="material-icons cyan-text">configuration</i></span> -->
-            </div>          
-            <span class="project-setting"><a routerLink="settings/{{project.id}}" routerLinkActive="active" ><i class=" material-icons black-text ">settings</i></a></span>
-        </li>
-      <li class="collection-item grey lighten-3" >
-        <div>Intents<a routerLink="/intentList/{{project.id}}" routerLinkActive="active" href="#!" class="secondary-content "><i class="material-icons cyan-text">chevron_right</i></a></div>
+      <li class="collection-item grey lighten-3 " id="project-select">
+        <!-- <div class="input-field"> -->
+        <!-- <select [(ngModel)]="project.id" (ngModelChange)="projectChange($event)" class="p-l-10" aria-placeholder="Projects"> -->
+        <!-- <option #plist *ngFor="let project of projectList;" [ngValue]="project.id">{{project.name}}</option> -->
+        <!-- <option  *ngFor="let project of projectList;" [ngValue]="project.id">{{project.name}}</option>
+          </select> -->
+        <!-- <span><i class="material-icons cyan-text">configuration</i></span> -->
+        <a class='dropdown-trigger btn-flat' data-target='dropdown1'>
+          <i class="material-icons left black-text fas fa-project-diagram"></i>
+          <span>{{project.name}}</span>
+        </a>
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+          <li *ngFor="let project of projectList ; index as i;" [attr.data-index]="i">
+            <a (click)="projectChange(i)">{{project.name}}</a>
+          </li>
+        </ul>
+        <!-- </div> -->
+        <span class="project-setting pointer">
+          <a (click)="projectSetting()">
+              <i class="  material-icons black-text fas fa-sliders-h"></i>
+            <!-- <i class=" material-icons black-text ">settings</i> -->
+          </a>
+        </span>
       </li>
       <li class="collection-item grey lighten-3">
-        <div>Reporting<a routerLink="/reporting" routerLinkActive="active" href="#!" class="secondary-content"><i class="material-icons cyan-text">chevron_right</i></a></div>
+        <div>
+          <i class="material-icons  left far fa-comment-alt"></i>
+          Intents
+          <a routerLink="/inl" routerLinkActive="active" href="#!" class="secondary-content ">
+            <i class="material-icons orange-text">chevron_right</i>
+          </a>
+        </div>
       </li>
       <li class="collection-item grey lighten-3">
-        <div>Integration<a class="waves-effect waves-light modal-trigger secondary-content " href="#modal1"><i class="material-icons cyan-text">chevron_right</i></a></div>
+        <div>
+          <i class=" material-icons  left fas fa-sitemap"></i>
+          Coversation Flow
+          <a routerLink="/flow" routerLinkActive="active" href="#!" class="secondary-content ">
+            <i class="material-icons orange-text">chevron_right</i>
+          </a>
+        </div>
       </li>
       <li class="collection-item grey lighten-3">
-          <a (click)="trainModel()" class="cyan btn">Train Model </a>
-          <!--  <a href="#new-project-modal" class="cyan  btn modal-trigger puple">Create project</a> -->
-        </li>
+        <div>
+          <i class="fas fa-link material-icons left"></i>
+          Integration
+          <a class="waves-effect waves-light modal-trigger secondary-content " href="#modal1">
+            <i class="material-icons orange-text">chevron_right</i>
+          </a>
+        </div>
+      </li>
     </ul>
+
   </ul>
 </div>
-<app-integration></app-integration>
+<!-- <app-integration [p] = "project.id" ></app-integration> -->
+<div id="modal1" class="modal white">
+  <div class="modal-content ">
+    <h4>Copy follwoing code to add bot in your website</h4>
+    <div id="code-div" class="grey lighten-3">
+      <a (click)="copyToClipboard(tta)" class=" right waves-effect waves-grey btn-flat">
+        <i class="material-icons">content_copy</i>
+      </a>
+      <div class="input-field">
+        <textarea readonly #tta class="materialize-textarea trans-select">{{codePrefix}}"{{ project.id}}" src="{{chatbotDomain}}{{ codeSuffix}}</textarea>
+        <!-- <input id="cin" disabled value={{code}} type="text" class="validate" /> -->
+      </div>
+    </div>
+    <div class="modal-footer grey lighten-3">
+      <a class="modal-close waves-effect waves-grey btn-flat">Cancel</a>
+    </div>
+  </div>
+</div>
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="cyan" type="ball-elastic-dots"></ngx-spinner>
+<div class="fixed-action-btn" style="outline: none;">
+  <a class="btn-floating btn-large ">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li>
+      <a routerLink="/picasi/{{project.id}}/" routerLinkActive="active" class="btn-floating orange darken-1 ">
+        <i class="material-icons">chat_bubble_outline</i>
+      </a>
+    </li>
+    <li>
+      <a (click)="trainModel()" class=" btn-floating red ">
+        <i class="material-icons">loop</i>
+      </a>
+    </li>
+
+
+  </ul>
+</div>
 <router-outlet></router-outlet>

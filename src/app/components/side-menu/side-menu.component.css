@@ -25,3 +25,11 @@
   height: 200px !important;
   width: 100% !important;
 }
+#code-div {
+  background: white;
+  padding: 20px;
+  font-size: 14px;
+}
+.sidenav li>a:hover {
+  background-color: transparent !important;
+}

@@ -1,17 +1,21 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Message } from '../../models/message';
 import { MessageItemComponent } from '../message-item/message-item.component';
-
+import * as M from 'materialize-css';
+import { ScrollbarComponent } from 'ngx-scrollbar';
+   
 @Component({
   selector: 'message-list',
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css']
 })
 export class MessageListComponent implements OnInit, AfterViewInit {
-
+  rawresponse ;
+  @ViewChild(ScrollbarComponent) scrollRef: ScrollbarComponent;
   @Input('messages')
   private messages: Message[];
-
+  @Output() responseClick: EventEmitter<any> = new EventEmitter();
+  @ViewChild('rawrespmodal', { read: ElementRef }) rawrespmodal: ElementRef;
   @ViewChild('chatlist', { read: ElementRef }) chatList: ElementRef;
   @ViewChildren(MessageItemComponent, { read: ElementRef }) chatItems: QueryList<MessageItemComponent>;
 
@@ -21,6 +25,7 @@ export class MessageListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log('Hello ngAfterViewInit');
+    M.Modal.init(document.querySelectorAll('.modal'), {});
     this.chatItems.changes.subscribe(elements => {
        console.log('messsage list changed: ' + this.messages.length);
       this.scrollToBottom();
@@ -36,8 +41,14 @@ export class MessageListComponent implements OnInit, AfterViewInit {
       console.log('Could not find the "chatList" element.');
     }
   }
-
   ngOnInit() {
   }
-
+  openRawResponseModal(i){
+    this.rawresponse = this.messages[i].rawresp;
+    M.Modal.getInstance(this.rawrespmodal.nativeElement).open(); 
+  }
+  getResponse($event){
+    //this.scrollRef.scrollToBottom()
+    this.responseClick.emit($event);
+  }
 }

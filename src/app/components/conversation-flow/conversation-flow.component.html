@@ -1,0 +1,56 @@
+<div class="main">
+  <a class=" btn waves-effect btn-top-round" (click)="saveFlow()">Save Flow</a>
+  <div class=" mynetwork" #mynetwork></div>
+</div>
+<!-- Modal Structure -->
+<div #newnodemodal class="modal">
+  <div class="modal-content">
+    <h4>Add Question</h4>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input placeholder="Description" [(ngModel)]="node.label" type="text" class="validate">
+      </div>
+    </div>
+    <div class="row">
+      <div class="switch">
+        <label>
+          Display as Button
+          <input [(ngModel)]="node.as_btn" type="checkbox">
+          <span class="lever"></span>
+        </label>
+      </div>
+    </div>
+    <div [hidden]="!node.as_btn">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Button text" [(ngModel)]="node.btn_txt" type="text" class="validate">
+        </div>
+      </div>
+      <div class="row">
+        <div class="valign-wrapper col s6">
+          <span class="col s2">Color</span>
+          <div class="input-field col s10">
+            <!-- <input placeholder="Description" [(ngModel)]="node.label" type="text" class="validate"> -->
+            <input class="black-text" type="text" [(colorPicker)]="this.node.color" [style.background]="this.node.color" [cpHeight]="200"
+              [cpPosition]="'right'" />
+          </div>
+        </div>
+        <div class="valign-wrapper col s6">
+          <span class="col s2">Text color</span>
+          <div class="input-field col s10">
+            <input type="text" [(colorPicker)]="this.node.txt_color" [style.background]="this.node.txt_color" [cpHeight]="200" [cpPosition]="'left'"
+              [style.background]="color" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a (click)="markStartingPoint()" class="left  waves-effect  btn-flat">{{this.startingNode == this.node.id ? "Remove as entry point" : "Conversation start point"}}</a>
+    <a (click)="addQuestion()" class= " modal-close waves-effect waves-green btn-flat">Save</a>
+  </div>
+</div>

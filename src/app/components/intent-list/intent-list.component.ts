@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { DataHandlerService } from '../../services/data-handler.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import * as M from 'materialize-css';
 import * as _ from 'lodash';
 import { QueryList } from '@angular/core';
@@ -12,36 +12,56 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./intent-list.component.css']
 })
 export class IntentListComponent implements OnInit {
-  intents:Array<Intent> = [];
-  intent = "";
-  project = "";
+  @ViewChildren('intents') ilist: QueryList<any>;
+  public pno: number = 1;
+  public totalIntents: number = 0;
+  public maxRecords: number = 10;
+  public pages: Array<number> = []
+  public intents: Array<Intent> = [];
+  public intent = "";
+  public project;
 
-  constructor(private dataHandlerService: DataHandlerService, private route: ActivatedRoute,private spinner : NgxSpinnerService) {
-    this.spinner.show();
-    this.route.params.subscribe(params => {
-      if (params.projectid) {
-        this.project = params.projectid;
-        this.initializeIntentList();
-      }
-    });
+  constructor(private dataHandlerService: DataHandlerService, private route: ActivatedRoute, 
+    private spinner: NgxSpinnerService, private router: Router) {
   }
   ngOnInit() {
-    M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
-    M.Tooltip.init(document.querySelectorAll('.tooltipped'), {});
+    this.spinner.show();
+        this.dataHandlerService.currentProject.subscribe(project => this.project = project);
+        this.initializeIntentList(this.pno);
+        M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
+        M.Tooltip.init(document.querySelectorAll('.tooltipped'), {});
   }
-  initializeIntentList() {
-    if (!this.project) {
-      console.log("No project selected");
+
+  initializeIntentList(pageno) {
+    if (pageno < 1 || (this.pages.length != 0 && pageno > this.pages.length)) {
       this.spinner.hide();
       return;
     }
-    return this.dataHandlerService.getIntentList(this.project).then((intents: Array<Intent>) => {
-      this.intents = intents;
+    if (!this.project.id) {
+      console.log("No project selected");
+      this.router.navigate(['/']);
       this.spinner.hide();
-      return intents;
+      return;
+    }
+    this.pno = pageno;
+    return this.dataHandlerService.getIntentList(this.project.id, this.pno).then(result => {
+      this.intents = result['data'];
+      if (this.pno == 1 && result['count']) {
+        this.totalIntents = result['count'];
+        this.pages = _.range(this.pno, this.totalIntents / this.maxRecords + 1);
+      } else if (this.intents.length == 0) {
+        this.spinner.hide();
+        this.totalIntents = 0;
+      }
+      this.spinner.hide();
+      return result;
     });
   }
-  
+  ngAfterViewInit() {
+    this.ilist.changes.subscribe(t => {
+      this.spinner.hide();
+    });
+  }
   deleteIntent(i) {
     let intents = this.intents;
     let blockRef = this;
@@ -54,5 +74,9 @@ export class IntentListComponent implements OnInit {
       }
     });
 
+  }
+  editIntent(intent) {
+    this.dataHandlerService.changeIntent(intent);
+    this.router.navigate(['/ine']);
   }
 }

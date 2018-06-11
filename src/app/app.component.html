@@ -1,4 +1,10 @@
-<div  class="chatform col s6 chat">
-  <message-list [messages]="messages"></message-list>
-  <message-form [botinit] = "botinit" [message]="message" [messages]="messages" class="bottom-fixed"></message-form>
+<div class="chatform">
+  <div class=" col s9 chat">
+    <div class="chatlist" #chatlist >
+    <perfect-scrollbar #scrollRef style="height: calc(100vh - 102px);" [config]="config">
+        <message-list (responseClick)="getResponse($event)" [messages]="messages"></message-list>
+    </perfect-scrollbar>
+    </div>
+    <message-form [scroll] = "scrollRef" [botinit]="botinit" [message]="message" [messages]="messages" class="bottom-fixed"></message-form>
+  </div>
 </div>

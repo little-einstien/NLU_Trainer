@@ -1,5 +1,25 @@
-<div class="chatlist" #chatlist>
+<!-- <div class="chatlist" #chatlist style="height: calc(100vh - 102px);"> -->
+  <!-- <ng-scrollbar  #scrollRef [autoUpdate] = "true"> -->
   <ul class="list-group">
-    <message-item *ngFor="let msg of messages" [message]="msg"></message-item>
+    <div *ngFor="let msg of messages; index as i;" [attr.data-index]="i">
+      <span [hidden] = "msg.type != 'bot'"  class="rawresp">
+        <a  (click)="openRawResponseModal(i)" class=" right waves-effect waves-purple btn-flat" >
+          <i class="material-icons">open_in_new</i>  
+        </a>
+      </span>
+      <message-item (responseClick) = "getResponse($event)"  [message]="msg" ></message-item>
+    </div>
   </ul>
+  <!-- </ng-scrollbar> -->
+<!-- </div> -->
+<div #rawrespmodal class="modal">
+    <div class="modal-content ">
+        <h4>Raw Response</h4>
+        <div id="rawresp-div" class="grey lighten-3">
+          <div>
+              <pre><code class="json orange-text">{{rawresponse|json}}</code></pre>
+          </div>
+        </div>
+        <div class="row center m-t-10"><a class="modal-close waves-effect btn">Close</a></div>
+      </div>
 </div>

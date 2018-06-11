@@ -1,39 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { AfterViewInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { DataHandlerService } from '../../services/data-handler.service';
 import * as M from 'materialize-css';
 import * as _ from 'lodash';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-intent-edit',
   templateUrl: './intent-edit.component.html',
   styleUrls: ['./intent-edit.component.css']
 })
 export class IntentEditComponent implements OnInit, AfterViewInit {
+  @ViewChildren('texts') tlist: QueryList<any>;
+  @ViewChildren('responses') rlist: QueryList<any>;
   sample = {};
-  projid = '';
+  sampresponses = {};
+  samples: Array<{ intent: string, text: string, res: string }> = [];
+  myControl: FormControl = new FormControl();
+
+  text: string;
+  response: string;
+  intent: string;
+  intentOld: string;
+  options = [];
+  texts = [];
+  responses = [];
+  highlightedText = "";
+  entityName = "";
+  entityValue = "";
+  pid = '';
   show = false;
-  constructor(private route: ActivatedRoute, private dataHandlerService: DataHandlerService) {
-    this.route.params.subscribe(params => {
-      console.log(params);
-      if (params.projid) {
-        this.projid = params.projid;
-      }
-      if (params.intent) {
-        this.intent = params.intent;
-        this.intentOld = params.intent;
-        this.dataHandlerService.getIntentDetails(this.projid, this.intent).then((data) => {
-          this.texts = data['text'];
-          this.responses = data['response'];
-        });
-      }
-    });
+  constructor(private route: ActivatedRoute, private dataHandlerService: DataHandlerService, private spinner: NgxSpinnerService) {
+    this.spinner.show();
+    this.dataHandlerService.currentProject.subscribe(project => this.pid = project.id);
+    if (this.pid && this.pid != '-1') {
+      this.dataHandlerService.currentIntent.subscribe(intent => this.intent = intent);
+      this.intentOld = this.intent;
+      this.dataHandlerService.getIntentDetails(this.pid, this.intent).then((data) => {
+        this.texts = data['text'];
+        this.responses = data['response'];
+        this.spinner.hide();
+      });
+    } else {
+      this.spinner.hide();
+    }
+
+  }
+  ngForRendered() {
+    M.FormSelect.init(document.querySelectorAll('select'), {});
   }
   saveIntent() {
     debugger;
     this.filterText(this.texts).then((_texts: Array<any>) => {
-      this.dataHandlerService.saveIntent({ "proj_id": this.projid, "old_intent": this.intentOld, "updated_intent": this.intent, "texts": _texts, "responses": this.responses });
+      this.dataHandlerService.saveIntent({ "proj_id": this.pid, "old_intent": this.intentOld, "updated_intent": this.intent, "texts": _texts, "responses": this.responses });
+      this.intentOld = this.intent;
       this.dataHandlerService.showAlert('Intent Saved Succefully');
     })
   }
@@ -55,6 +76,9 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
 
   ngOnInit() { }
   ngAfterViewInit() {
+    this.tlist.changes.subscribe(t => {
+      this.spinner.hide();
+    });
     var elem = document.querySelector('.collapsible.expandable');
     var instance = M.Collapsible.init(elem, {
       accordion: false
@@ -63,19 +87,6 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     var instances = M.Tooltip.init(elems, {});
 
   }
-  samples: Array<{ intent: string, text: string, res: string }> = [];
-  myControl: FormControl = new FormControl();
-
-  text: string;
-  response: string;
-  intent: string;
-  intentOld: string;
-  options = [];
-  texts = [];
-  responses = [];
-  highlightedText = "";
-  entityName = "";
-  entityValue = "";
 
 
 

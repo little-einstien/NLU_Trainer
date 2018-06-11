@@ -1,6 +1,8 @@
-.p-10{
-  padding:10px;
+.card{
+    border-radius: 10px 10px !important;
+    -webkit-box-shadow: none !important;
+    background: transparent; 
 }
-.m-b-10{
-  margin-bottom: 10px;
+.card .card-content {
+    padding: 0px !important;
 }

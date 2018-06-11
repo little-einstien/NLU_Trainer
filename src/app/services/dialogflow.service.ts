@@ -12,6 +12,7 @@ import { Message } from '../models/message';
 export class DialogflowService {
 
   private baseURL: string = "http://localhost:4203/api";
+   //private baseURL: string = "http://35.200.131.47:4205/api";
   // private token: string = environment.token;
   private token: string = "ce1d01dc31b946fa8740ae14100f5ddb";
    project: string = "ce1d01dc31b946fa8740ae14100f5ddb";

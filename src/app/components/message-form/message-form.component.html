@@ -1,5 +1,5 @@
 
-<div class="chatcontrol m-t-10">
-  <input type="text" (keydown)="onKeydown($event)" class="form-control chatinput" [(ngModel)]="message.content" />
+<div class="chatcontrol col s9 m-t-10 input-field  ">
+  <input type="text" placeholder="Type your message here" (keydown)="onKeydown($event)" class="form-control chatinput" [(ngModel)]="message.content.txt" />
   <!-- <button class="btn btn-success sendbtn" (click)="sendMessage()">Send</button> -->
 </div>
