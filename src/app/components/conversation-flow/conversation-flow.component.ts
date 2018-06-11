@@ -20,6 +20,7 @@ export class ConversationFlowComponent implements OnInit {
   network;
   nodes = new DataSet([]);
   edges = new DataSet([]);
+  isNewFlow = true;
   project;
   @ViewChild('mynetwork') mynetwork: ElementRef;
   @ViewChild('newnodemodal') newnodemodal: ElementRef;
@@ -33,6 +34,7 @@ export class ConversationFlowComponent implements OnInit {
     this.spinner.show();
     this.dataService.getFlow(this.project.id).then((data: any) => {
       this.startingNode = data.sp;
+      
        if(data.flow.nodes)
         this.nodes = new DataSet(Object.values(data.flow.nodes));
       if(data.flow.edges)
