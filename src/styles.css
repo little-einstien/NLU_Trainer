@@ -288,3 +288,7 @@ i.left {
 .modal .row{
     margin-bottom: 0px !important;
 }
+.flow-modal{
+      overflow-y: inherit;
+ 
+}
