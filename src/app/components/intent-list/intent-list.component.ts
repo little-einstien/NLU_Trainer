@@ -21,8 +21,7 @@ export class IntentListComponent implements OnInit {
   public intent = "";
   public project;
 
-  constructor(
-    private dataHandlerService: DataHandlerService,
+  constructor(private dataHandlerService: DataHandlerService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService, private router: Router) { }
   ngOnInit() {

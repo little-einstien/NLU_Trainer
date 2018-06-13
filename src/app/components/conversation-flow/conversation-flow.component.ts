@@ -20,6 +20,7 @@ export class ConversationFlowComponent implements OnInit {
   network;
   nodes = new DataSet([]);
   edges = new DataSet([]);
+  isNewFlow = false;
   project;
   @ViewChild('mynetwork') mynetwork: ElementRef;
   @ViewChild('newnodemodal') newnodemodal: ElementRef;
@@ -32,6 +33,10 @@ export class ConversationFlowComponent implements OnInit {
     this.dataService.currentProject.subscribe(project => this.project = project)
     this.spinner.show();
     this.dataService.getFlow(this.project.id).then((data: any) => {
+      if(!data){
+        this.isNewFlow = false;
+        return;
+      }
       this.startingNode = data.sp;
       if(data.flow.nodes)
         this.nodes = new DataSet(Object.values(data.flow.nodes));
@@ -150,7 +155,7 @@ export class ConversationFlowComponent implements OnInit {
   saveFlow(){
     this.spinner.show();
     this.dataService.currentProject.subscribe(project => this.project = project);
-    this.dataService.saveFlow({pid:this.project.id,sp: this.startingNode,
+    this.dataService.saveFlow(this.isNewFlow,{pid:this.project.id,sp: this.startingNode,
       flow:{nodes:this.nodes._data,edges:Object.values(this.edges._data)}}).then((result)=>{
       if(result['status'] == 'success'){
         this.spinner.hide();
