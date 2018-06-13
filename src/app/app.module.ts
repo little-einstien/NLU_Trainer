@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule, routingComponents } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReportingComponent } from './reporting/reporting.component';
@@ -25,10 +26,13 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { RegistrationStepperComponent } from './components/registration-stepper/registration-stepper.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
- 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+
 
 @NgModule({
   declarations: [
@@ -50,15 +54,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IntegrationComponent,
     NewProjectComponent,
     ProjectSettingComponent,
-    ConversationFlowComponent
+    ConversationFlowComponent,
+    RegistrationStepperComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule, PerfectScrollbarModule
   ],
-  providers: [ {
+  providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   }],

@@ -12,6 +12,7 @@ import { ProjectSettingComponent } from '../components/project-setting/project-s
 import { ProjectListComponent } from '../components/project-list/project-list.component';
 import { ConversationFlowComponent } from '../components/conversation-flow/conversation-flow.component';
 import { SideMenuComponent } from '../components/side-menu/side-menu.component';
+import { RegistrationStepperComponent } from '../components/registration-stepper/registration-stepper.component';
 
 
 
@@ -21,7 +22,7 @@ const routes : Routes = [
   {path:'newproj',component:NewProjectComponent},
   {path:'settings/:projectid',component:ProjectSettingComponent},
   //{path:'intentList/:projectid',component:IntentListComponent},
-  // {path:'intentList/:projectid',component:ProjectListComponent},
+  //{path:'intentList/:projectid',component:ProjectListComponent},
   //{path:'intentList',component:IntentListComponent,resolve:{intent : IntentListResolve}},
   {path:'',component:SideMenuComponent},
   {path:'integration/:pid',component:IntegrationComponent},
@@ -30,6 +31,7 @@ const routes : Routes = [
   {path:'intentEdit',component:IntentEditComponent},
   {path:'reporting',component:ReportingComponent},
   {path:'picasi/:project',component:AppComponent},
+  {path:'stepper',component:RegistrationStepperComponent}
 ]
 @NgModule({
   imports: [

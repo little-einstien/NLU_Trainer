@@ -33,41 +33,20 @@ export class ConversationFlowComponent implements OnInit {
     this.spinner.show();
     this.dataService.getFlow(this.project.id).then((data: any) => {
       this.startingNode = data.sp;
-       if(data.flow.nodes)
+      if(data.flow.nodes)
         this.nodes = new DataSet(Object.values(data.flow.nodes));
       if(data.flow.edges)
         this.edges = new DataSet(Object.values(data.flow.edges));
-      // for (var i = 0; i < data.flow.length; i++) {
-      //   this.nodes.add({ id: data.flow[i].nid, label: data.flow[i].text });
-      //   if (data.flow[i].children) {
-      //     for (var j = 0; j < data.flow[i].children.length; j++) {
-      //       this.edges.add({ from: data.flow[i].nid, to: data.flow[i].children[j] })
-      //     }
-      //   }
-      //   if (i == data.flow.length - 1) {
-      //     this.intialize();
-      //   }
-      // }
-      setTimeout(() => {
-        this.intialize();
-      },250);
+      setTimeout(() => {this.intialize();},250);
     });
-    setTimeout(() => {
-      this.intialize();
-    },250);
+    setTimeout(() => {this.intialize();},250);
   }
   intialize() {
     M.Modal.init(document.querySelectorAll('.modal'), {});
-    // create an array with edges
-    // this.edges = new DataSet([]);
-    // let blockref = this;
-    // // create a network
-    // var container = document.getElementById('mynetwork');
     var data = {
       nodes: this.nodes,
       edges: this.edges
     };
-    debugger;
     var options = {
       physics: { barnesHut: { gravitationalConstant: -4000 } },
       nodes: {
@@ -100,7 +79,6 @@ export class ConversationFlowComponent implements OnInit {
         }, addEdge: (params, callback) => {
           console.log('Edge added');
           console.log(params);
-          //this.publishLink(params);
           callback(params);
         }
 

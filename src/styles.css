@@ -288,3 +288,6 @@ i.left {
 .modal .row{
     margin-bottom: 0px !important;
 }
+.datepicker-container{
+    color : black;
+}

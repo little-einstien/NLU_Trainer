@@ -32,6 +32,7 @@
     "json2typescript": "^1.0.5",
     "loadash": "^1.0.0",
     "materialize-css": "^1.0.0-rc.1",
+    "ng-pick-datetime": "^5.2.6",
     "ngx-clipboard": "^11.1.0",
     "ngx-color-picker": "^6.3.3",
     "ngx-perfect-scrollbar": "^6.2.0",

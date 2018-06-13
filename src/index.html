@@ -8,16 +8,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="assets/materialize/css/materialize.min.css">
   <link rel="stylesheet" href="http://visjs.org/dist/vis-network.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <!-- Compiled and minified JavaScript -->
-  
+  <link rel="stylesheet" href="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.8.5/jquery-ui.min.js" integrity="sha256-fOse6WapxTrUSJOJICXXYwHRJOPa6C1OUQXi7C9Ddy8=" crossorigin="anonymous"></script>
+  <script src="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.js"></script>
+
   <script>
 
     $(document).ready(function () {
@@ -28,7 +28,19 @@
 
       $('.sidenav').sidenav();
     });
+    $(function () {
+      $('.stepper').activateStepper();
+    });
+    function anyThing() {
+      alert();
+      setTimeout(function () { $('.stepper').nextStep(); }, 1500);
+    }
   </script>
+
+
+
+
+
 
   <body>
     <div class="row">
@@ -36,7 +48,7 @@
       <app-side-menu></app-side-menu>
       <!-- <app-project-list></app-project-list> -->
     </div>
-  
+
   </body>
 
 </html>

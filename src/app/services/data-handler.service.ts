@@ -26,15 +26,15 @@ export class DataHandlerService {
   public intents: Array<Intent>;
   public project;
   constructor(private http: HttpClient) { }
-  
+
   /**
    * 
    * 
-   * */  
+   * */
   getIntentList(pid, pno) {
     return new Promise((resolve, reject) => {
       let url = `${this.apiRoot}/getintents/${pid}/${pno}`;
-      this.http.get(url).subscribe((res:any) => {
+      this.http.get(url).subscribe((res: any) => {
         this.intents = res.data;
         resolve(res);
       });
@@ -47,7 +47,7 @@ export class DataHandlerService {
   getProjectList() {
     return new Promise((resolve, reject) => {
       let url = this.apiRoot + '/api/projects';
-      this.http.get(url).subscribe((res:any) => {
+      this.http.get(url).subscribe((res: any) => {
         if (res.status == DataHandlerService.SUCCESS) {
           this.project = res.data[0].id;
           this.projectList = res.data;
@@ -58,8 +58,8 @@ export class DataHandlerService {
       });
     });
   }
-  
-  
+
+
   getIntentDetails(projectid, intent) {
     return new Promise((resolve, reject) => {
       let url = this.apiRoot + '/getintentdetails/' + projectid + '/' + intent;
@@ -181,7 +181,7 @@ export class DataHandlerService {
   changeProject(project: Project) {
     this.projectSource.next(project);
   }
-  changeIntent(intent){
+  changeIntent(intent) {
     this.intentSource.next(intent);
   }
   getFlow(pid) {
@@ -203,6 +203,22 @@ export class DataHandlerService {
       let url = `${this.apiRoot}/api/flows/${details.pid}`;
       this.http.put(url, details, httpOptions).subscribe(res => {
         resolve(res);
+      });
+    });
+  }
+  saveAppointment(appointment) {
+    return new Promise((resolve, reject) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      let url = `${this.apiRoot}/api/appointments`;
+      this.http.post(url, appointment, httpOptions).subscribe(res => {
+        if (res) {
+          alert("Appointment saved");
+        }
+        // resolve(res);
       });
     });
   }
