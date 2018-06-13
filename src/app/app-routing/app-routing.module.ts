@@ -12,7 +12,7 @@ import { ProjectSettingComponent } from '../components/project-setting/project-s
 import { ProjectListComponent } from '../components/project-list/project-list.component';
 import { ConversationFlowComponent } from '../components/conversation-flow/conversation-flow.component';
 import { SideMenuComponent } from '../components/side-menu/side-menu.component';
-
+import { EventCalenderComponent } from '../components/event-calender/event-calender.component';
 
 
 const routes : Routes = [
@@ -30,6 +30,7 @@ const routes : Routes = [
   {path:'intentEdit',component:IntentEditComponent},
   {path:'reporting',component:ReportingComponent},
   {path:'picasi/:project',component:AppComponent},
+ {path:'ec',component:EventCalenderComponent},
 ]
 @NgModule({
   imports: [

@@ -17,7 +17,8 @@ import { IntentListComponent } from './components/intent-list/intent-list.compon
 import { IntentEditComponent } from './components/intent-edit/intent-edit.component';
 import { IntegrationComponent } from './components/integration/integration.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
-import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
+import { ProjectSettingComponent } from './components/project-setting/project-setting.component' ;
+import { EventCalenderComponent } from './components/event-calender/event-calender.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConversationFlowComponent } from './components/conversation-flow/conversation-flow.component';
@@ -28,7 +29,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
- 
+import { CalendarModule } from 'angular-calendar'; 
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IntentListComponent,
     IntentEditComponent,
     IntegrationComponent,
+EventCalenderComponent,
     NewProjectComponent,
     ProjectSettingComponent,
     ConversationFlowComponent
@@ -56,6 +58,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CalendarModule.forRoot(),
     HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule
   ],
   providers: [ {
