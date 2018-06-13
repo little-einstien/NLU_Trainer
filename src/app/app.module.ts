@@ -31,13 +31,10 @@ import { RegistrationStepperComponent } from './components/registration-stepper/
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
-<<<<<<< HEAD
 import { CalendarModule } from 'angular-calendar'; 
-=======
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
->>>>>>> c43b04d7c99a17072404ddbf8a46f29cc2bee492
 
 @NgModule({
   declarations: [
