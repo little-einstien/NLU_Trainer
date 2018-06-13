@@ -33,6 +33,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 import { CalendarModule } from 'angular-calendar'; 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { DemoModule } from './components/event-calender/module';
 
 
 
@@ -54,7 +56,6 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     IntentListComponent,
     IntentEditComponent,
     IntegrationComponent,
-EventCalenderComponent,
     NewProjectComponent,
     ProjectSettingComponent,
     ConversationFlowComponent,
@@ -62,22 +63,18 @@ EventCalenderComponent,
   ],
   imports: [
     BrowserModule,
+    DemoModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-<<<<<<< HEAD
     CalendarModule.forRoot(),
     HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule
-=======
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
-    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule, PerfectScrollbarModule
->>>>>>> c43b04d7c99a17072404ddbf8a46f29cc2bee492
   ],
   providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   }],
   bootstrap: [SideMenuComponent]
+  
 })
 export class AppModule { }

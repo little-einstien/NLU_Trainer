@@ -15,9 +15,11 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.8.5/jquery-ui.min.js" integrity="sha256-fOse6WapxTrUSJOJICXXYwHRJOPa6C1OUQXi7C9Ddy8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.8.5/jquery-ui.min.js" integrity="sha256-fOse6WapxTrUSJOJICXXYwHRJOPa6C1OUQXi7C9Ddy8="
+    crossorigin="anonymous"></script>
   <script src="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.js"></script>
-
+  <link href="https://unpkg.com/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.css" rel="stylesheet">
   <script>
 
     $(document).ready(function () {
@@ -25,7 +27,6 @@
       var instance = M.Collapsible.init(elem, {
         accordion: false
       });
-
       $('.sidenav').sidenav();
     });
     $(function () {
@@ -44,9 +45,13 @@
 
   <body>
     <div class="row">
-      <!-- <app-root></app-root> -->
       <app-side-menu></app-side-menu>
+      <!-- <app-root></app-root> -->
+      <!-- 
+        
+       -->
       <!-- <app-project-list></app-project-list> -->
+      <!-- <app-event-calender></app-event-calender> -->
     </div>
 
   </body>

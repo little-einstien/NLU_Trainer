@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 
 import {
@@ -12,12 +12,13 @@ import {
   addHours
 } from 'date-fns';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataHandlerService } from '../../services/data-handler.service';
 
 const colors: any = {
   red: {
@@ -40,7 +41,9 @@ const colors: any = {
 })
 export class EventCalenderComponent implements OnInit {
 
-@ViewChild('modalContent') modalContent: TemplateRef<any>;
+  ngOnInit(): void {
+  }
+  @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   view: string = 'month';
 
@@ -69,43 +72,64 @@ export class EventCalenderComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events: CalendarEvent[] = [];
+  //   {
+  //     start: subDays(startOfDay(new Date()), 1),
+  //     end: addDays(new Date(), 1),
+  //     title: 'A 3 day event',
+  //     color: colors.red,
+  //     actions: this.actions
+  //   },
+  //   {
+  //     start: startOfDay(new Date()),
+  //     title: 'An event with no end date',
+  //     color: colors.yellow,
+  //     actions: this.actions
+  //   },
+  //   {
+  //     start: subDays(endOfMonth(new Date()), 3),
+  //     end: addDays(endOfMonth(new Date()), 3),
+  //     title: 'A long event that spans 2 months',
+  //     color: colors.blue
+  //   },
+  //   {
+  //     start: addHours(startOfDay(new Date()), 2),
+  //     end: new Date(),
+  //     title: 'A draggable and resizable event',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //     resizable: {
+  //       beforeStart: true,
+  //       afterEnd: true
+  //     },
+  //     draggable: true
+  //   }
+  // ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal,private dataHandlerServie  : DataHandlerService) {
+    this.dataHandlerServie.getAppointments('').then((appointments:Array<any>) => {
+      this.events = [
+        ];
+      
+      for(let i = 0 ; i< appointments.length; i++){
+        this.events.push({
+          start: new Date(appointments[i].st),
+          end: new Date(appointments[i].et),
+          title: appointments[i].title,
+          color: colors.yellow,
+          actions: this.actions,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true
+        });
+      }
+            
+    });
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
