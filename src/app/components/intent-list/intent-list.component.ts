@@ -21,15 +21,15 @@ export class IntentListComponent implements OnInit {
   public intent = "";
   public project;
 
-  constructor(private dataHandlerService: DataHandlerService, private route: ActivatedRoute, 
-    private spinner: NgxSpinnerService, private router: Router) {
-  }
+  constructor(private dataHandlerService: DataHandlerService,
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService, private router: Router) { }
   ngOnInit() {
     this.spinner.show();
-        this.dataHandlerService.currentProject.subscribe(project => this.project = project);
-        this.initializeIntentList(this.pno);
-        M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
-        M.Tooltip.init(document.querySelectorAll('.tooltipped'), {});
+    this.dataHandlerService.currentProject.subscribe(project => this.project = project);
+    this.initializeIntentList(this.pno);
+    M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'), {});
   }
 
   initializeIntentList(pageno) {

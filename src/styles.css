@@ -288,11 +288,6 @@ i.left {
 .modal .row{
     margin-bottom: 0px !important;
 }
-.flow-modal{
-      overflow-y: inherit;
- 
-}
-.color-picker{
-  height: auto !important;
-
+.datepicker-container{
+    color : black;
 }

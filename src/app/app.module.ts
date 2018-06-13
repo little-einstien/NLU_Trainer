@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule, routingComponents } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReportingComponent } from './reporting/reporting.component';
@@ -26,10 +27,17 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { RegistrationStepperComponent } from './components/registration-stepper/registration-stepper.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
+<<<<<<< HEAD
 import { CalendarModule } from 'angular-calendar'; 
+=======
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+
+>>>>>>> c43b04d7c99a17072404ddbf8a46f29cc2bee492
 
 @NgModule({
   declarations: [
@@ -52,16 +60,24 @@ import { CalendarModule } from 'angular-calendar';
 EventCalenderComponent,
     NewProjectComponent,
     ProjectSettingComponent,
-    ConversationFlowComponent
+    ConversationFlowComponent,
+    RegistrationStepperComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+<<<<<<< HEAD
     CalendarModule.forRoot(),
     HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule
+=======
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule, PerfectScrollbarModule
+>>>>>>> c43b04d7c99a17072404ddbf8a46f29cc2bee492
   ],
-  providers: [ {
+  providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   }],
