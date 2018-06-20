@@ -180,3 +180,8 @@ blockquote {
        Padding: 10px 0px;
 }
 
+.dropdown-content[_ngcontent-c4] {
+  top: 486px !important;
+  height: 200px !important;
+  width: 40% !important;
+}

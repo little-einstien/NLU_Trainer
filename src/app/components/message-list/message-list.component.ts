@@ -28,7 +28,7 @@ export class MessageListComponent implements OnInit, AfterViewInit {
     M.Modal.init(document.querySelectorAll('.modal'), {});
     this.chatItems.changes.subscribe(elements => {
        console.log('messsage list changed: ' + this.messages.length);
-      this.scrollToBottom();
+      //this.scrollToBottom();
     });
   }
 

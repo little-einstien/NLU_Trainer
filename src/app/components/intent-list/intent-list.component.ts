@@ -23,7 +23,11 @@ export class IntentListComponent implements OnInit {
 
   constructor(private dataHandlerService: DataHandlerService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService, private router: Router) { }
+    private spinner: NgxSpinnerService, private router: Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function() {
+        return false;
+    };
+    }
   ngOnInit() {
     this.spinner.show();
     this.dataHandlerService.currentProject.subscribe(project => this.project = project);
@@ -61,6 +65,7 @@ export class IntentListComponent implements OnInit {
     this.ilist.changes.subscribe(t => {
       this.spinner.hide();
     });
+    
   }
   deleteIntent(i) {
     let intents = this.intents;
@@ -79,4 +84,6 @@ export class IntentListComponent implements OnInit {
     this.dataHandlerService.changeIntent(intent);
     this.router.navigate(['/ine']);
   }
+
+  
 }

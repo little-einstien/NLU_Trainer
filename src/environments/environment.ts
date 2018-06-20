@@ -8,7 +8,7 @@ export const environment = {
   // nlu_endpoint : 'http://35.200.142.0/4203/api',
   // api_endpoint  : 'http://35.200.142.0:3000',
   // bot_endpoint : 'http://35.200.142.0:3000',
-  nlu_endpoint : 'http://localhost:4203/api',
+  nlu_endpoint : 'http://localhost:4203',
   api_endpoint  : 'http://localhost:3000',
   bot_endpoint : 'http://localhost:3000',
   

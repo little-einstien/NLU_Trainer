@@ -22,3 +22,10 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 .type-policy.hex-text{
     display: none !important;
 }
+
+.color-picker {
+    height: auto !important;
+}
+.flow-modal {
+	overflow: inherit;
+}

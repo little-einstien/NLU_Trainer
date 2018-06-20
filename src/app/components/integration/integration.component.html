@@ -3,11 +3,11 @@
   <div class="modal-content ">
     <h4>Copy follwoing code to add bot in your website</h4>
     <div id="code-div" class="grey lighten-3">
-      <a  (click)="copyToClipboard(tta)" class=" right waves-effect waves-purple btn-flat" >
-        <i class="material-icons">content_copy</i>  
+      <a (click)="copyToClipboard(tta)" class=" right waves-effect waves-purple btn-flat">
+        <i class="material-icons">content_copy</i>
       </a>
       <div class="input-field">
-          <textarea  readonly #tta  class="materialize-textarea trans-select" >{{code}}</textarea>
+        <textarea readonly #tta class="materialize-textarea trans-select">{{code}}</textarea>
         <!-- <input id="cin" disabled value={{code}} type="text" class="validate" /> -->
       </div>
     </div>
@@ -15,4 +15,4 @@
       <a class="modal-close waves-effect waves-purple btn-flat">Cancel</a>
     </div>
   </div>
-  </div>
+</div>

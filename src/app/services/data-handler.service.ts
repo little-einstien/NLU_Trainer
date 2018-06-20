@@ -103,7 +103,7 @@ export class DataHandlerService {
         })
       };
       try {
-        this.http.get(`this.nlu_ep/${pid}`).subscribe(res => {
+        this.http.get(`${this.nlu_ep}/train/${pid}`).subscribe(res => {
           resolve(res);
         }, error => {
           reject(error);

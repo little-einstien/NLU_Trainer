@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SideMenuComponent implements OnInit, AfterViewInit {
-  // public project: Project = new Project("", 1, '');
+  // @Output() projectChange: EventEmitter<any> = new EventEmitter();
   public project: Project = new Project("Create Project", 1, '-1');
   public projectList: Array<Project> = [new Project("Create Project", 1, '-1')];
   // public projectList: Array<Project> = [];
@@ -41,7 +41,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
   }
   ngForRendered() {
-    setTimeout(() => {M.FormSelect.init(document.querySelectorAll('select'), {classes:['_wrapper']})},250);
+    setTimeout(() => { M.FormSelect.init(document.querySelectorAll('select'), { classes: ['_wrapper'] }) }, 250);
   }
   ngOnInit() {
     this.spinner.show();
@@ -64,17 +64,20 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
     setTimeout(() => {
       var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems, {});
-    },1000);
+      var instances = M.Dropdown.init(elems, {});
+    }, 1000);
   }
   projectChange(i) {
     this.project = this.projectList[i];
     this.dataHandlerService.changeProject(this.project);
+
     if (this.project.id == "-1") {
       this.router.navigate(['/newproj']);
       return;
+    } else {
+      // this.router.navigate(['/inl']);
+      // this.projectChange.emit();
     }
-    this.router.navigate(['/inl']);
   }
   projectSetting() {
     if (this.project.id == "-1") {

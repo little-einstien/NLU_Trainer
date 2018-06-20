@@ -15,10 +15,10 @@ export class AppComponent {
   @ViewChild(PerfectScrollbarComponent) componentRef?: PerfectScrollbarComponent;
   public type: string = 'component';
   @ViewChild(PerfectScrollbarDirective) directiveRef?: PerfectScrollbarDirective;
-  public message: Message = new Message({txt:'',type:1}, 'assets/images/user.png', 'user', new Date());;
+  public message: Message = new Message({txt:'',type:0}, 'assets/images/user.png', 'user', new Date());;
   
   public messages: Message[] = [
-    new Message({txt: 'Welcome i am your assitant',type:3}, 'assets/images/bot.png', 'bot', new Date())
+    new Message({txt: 'Welcome i am your assitant',type:  0}, 'assets/images/bot.png', 'bot', new Date())
   ];
   public botint: boolean;
   public flow;

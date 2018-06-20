@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes,RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { IntentEditComponent } from '../components/intent-edit/intent-edit.component';
 import { IntentListComponent } from '../components/intent-list/intent-list.component';
 import { ReportingComponent } from '../reporting/reporting.component';
-import {IntentListResolve} from  '../common/intent-list-resolver'
+import { IntentListResolve } from '../common/intent-list-resolver'
 import { AppComponent } from '../app.component';
 import { IntegrationComponent } from '../components/integration/integration.component';
 import { NewProjectComponent } from '../components/new-project/new-project.component';
@@ -16,32 +16,33 @@ import { EventCalenderComponent } from '../components/event-calender/event-calen
 import { RegistrationStepperComponent } from '../components/registration-stepper/registration-stepper.component';
 
 
-const routes : Routes = [
-  {path:'inl',component:IntentListComponent},
-  {path:'flow',component:ConversationFlowComponent},
-  {path:'newproj',component:NewProjectComponent},
-  {path:'settings/:projectid',component:ProjectSettingComponent},
+const routes: Routes = [
+  { path: 'inl', component: IntentListComponent },
+  { path: 'flow', component: ConversationFlowComponent },
+  { path: 'newproj', component: NewProjectComponent },
+  { path: 'settings/:projectid', component: ProjectSettingComponent },
   //{path:'intentList/:projectid',component:IntentListComponent},
   //{path:'intentList/:projectid',component:ProjectListComponent},
   //{path:'intentList',component:IntentListComponent,resolve:{intent : IntentListResolve}},
-  {path:'',component:SideMenuComponent},
-  {path:'integration/:pid',component:IntegrationComponent},
+  { path: '', component: SideMenuComponent },
+  { path: 'integration/:pid', component: IntegrationComponent },
   //{path:'intentEdit/:projid/:intent',component:IntentEditComponent},
-  {path:'ine',component:IntentEditComponent},
-  {path:'intentEdit',component:IntentEditComponent},
-  {path:'reporting',component:ReportingComponent},
-  {path:'picasi/:project',component:AppComponent},
- {path:'ec',component:EventCalenderComponent},
-  {path:'stepper',component:RegistrationStepperComponent}
+  { path: 'ine', component: IntentEditComponent },
+  { path: 'intentEdit', component: IntentEditComponent },
+  { path: 'reporting', component: ReportingComponent },
+  { path: 'picasi/:project', component: AppComponent },
+  { path: 'ec', component: EventCalenderComponent },
+  { path: 'stepper', component: RegistrationStepperComponent }
+
 ]
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes,{ enableTracing: false ,onSameUrlNavigation: 'reload'})
+    RouterModule.forRoot(routes, { enableTracing: false, onSameUrlNavigation: 'reload' })
   ],
-  exports:[RouterModule],
+  exports: [RouterModule],
   declarations: [],
-  providers:[IntentListResolve]
+  providers: [IntentListResolve]
 })
 export class AppRoutingModule { }
-export const routingComponents = [IntentListComponent,IntentEditComponent,ReportingComponent,NewProjectComponent,ProjectSettingComponent]
+export const routingComponents = [IntentListComponent, IntentEditComponent, ReportingComponent, NewProjectComponent, ProjectSettingComponent]

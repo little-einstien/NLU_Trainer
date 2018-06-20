@@ -13,35 +13,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.8.5/jquery-ui.min.js" integrity="sha256-fOse6WapxTrUSJOJICXXYwHRJOPa6C1OUQXi7C9Ddy8="
-    crossorigin="anonymous"></script>
-  <script src="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.js"></script>
-  <link href="https://unpkg.com/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.css" rel="stylesheet">
-  <script>
-
-    $(document).ready(function () {
-      var elem = document.querySelector('.collapsible.expandable');
-      var instance = M.Collapsible.init(elem, {
-        accordion: false
-      });
-      $('.sidenav').sidenav();
-    });
-    $(function () {
-      $('.stepper').activateStepper();
-    });
-    function anyThing() {
-      alert();
-      setTimeout(function () { $('.stepper').nextStep(); }, 1500);
-    }
-  </script>
+    <link rel="stylesheet" href="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.css">
 
 
-
-
-
+</head>
 
   <body>
     <div class="row">
@@ -55,7 +30,21 @@
     </div>
 
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script
+  src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"
+  integrity="sha256-hTpbeVXhgCmfO7nGcWp9d1kImKbzY6gN0Vo5u5wLuss="
+  crossorigin="anonymous"></script>
+  <script src="https://rawgit.com/Kinark/Materialize-stepper/master/materialize-stepper.min.js"></script>
 
+  <script>
+    window.initStepper = function(){ 
+      $('.stepper').activateStepper();
+    }
+    function anyThing() {
+       $('.stepper').nextStep();
+    }
+  </script>
 </html>
-</head>
+
 <!-- <script type="text/javascript" id = "bot-script" data-project = "h4GoLlV" src="http://localhost:3000/plugin/js/chatBotWidget.js"></script>   -->

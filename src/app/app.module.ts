@@ -35,6 +35,10 @@ import { CalendarModule } from 'angular-calendar';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DemoModule } from './components/event-calender/module';
+import { EventTrackerComponent } from './components/event-tracker/event-tracker.component';
+import { WindowRef } from './common/WindowRef';
+import { ScheduleViewerComponent } from './components/schedule-viewer/schedule-viewer.component';
+
 
 
 
@@ -59,7 +63,9 @@ import { DemoModule } from './components/event-calender/module';
     NewProjectComponent,
     ProjectSettingComponent,
     ConversationFlowComponent,
-    RegistrationStepperComponent
+    RegistrationStepperComponent,
+    EventTrackerComponent,
+    ScheduleViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,7 @@ import { DemoModule } from './components/event-calender/module';
   providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-  }],
+  },WindowRef],
   bootstrap: [SideMenuComponent]
   
 })

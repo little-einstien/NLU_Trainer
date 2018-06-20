@@ -1,10 +1,11 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { AfterViewInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { DataHandlerService } from '../../services/data-handler.service';
 import * as M from 'materialize-css';
 import * as _ from 'lodash';
+// import * as $ from 'jquery';  
 import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-intent-edit',
@@ -12,21 +13,24 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./intent-edit.component.css']
 })
 export class IntentEditComponent implements OnInit, AfterViewInit {
+
   @ViewChildren('texts') tlist: QueryList<any>;
+  @ViewChild('taber') taber: ElementRef;
   @ViewChildren('responses') rlist: QueryList<any>;
-  sample = {};
-  sampresponses = {};
+  sampresponses = [];
   samples: Array<{ intent: string, text: string, res: string }> = [];
   myControl: FormControl = new FormControl();
-
+  responseTypes = [{ name: 'Text', id: 1 }, { name: 'event', id: 3 }];
+  rType = 1;
   text: string;
   response: string;
   intent: string;
   intentOld: string;
   options = [];
   texts = [];
-  responses = [];
+  responses = [{ type: 1, txt_resps: [] }, { type: 3, step_resp: { s1: { sd_lbl: '', st_lbl: '', ed_lbl: '', et_lbl: '' }, s2: { fields: [] }, s3: { btn_txt: '', btn_clr: '', btn_txt_clr: '', msg: '' } } }];
   highlightedText = "";
+  text_response = ""
   entityName = "";
   entityValue = "";
   pid = '';
@@ -37,21 +41,25 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     if (this.pid && this.pid != '-1') {
       this.dataHandlerService.currentIntent.subscribe(intent => this.intent = intent);
       this.intentOld = this.intent;
+      if(this.intent){
       this.dataHandlerService.getIntentDetails(this.pid, this.intent).then((data) => {
         this.texts = data['text'];
-        this.responses = data['response'];
+        if (this.responses && this.responses.length != 0) {
+          this.responses = data['response'];
+        }
+
         this.spinner.hide();
       });
     } else {
       this.spinner.hide();
     }
+  }
 
   }
   ngForRendered() {
     M.FormSelect.init(document.querySelectorAll('select'), {});
   }
   saveIntent() {
-    debugger;
     this.filterText(this.texts).then((_texts: Array<any>) => {
       this.dataHandlerService.saveIntent({ "proj_id": this.pid, "old_intent": this.intentOld, "updated_intent": this.intent, "texts": _texts, "responses": this.responses });
       this.intentOld = this.intent;
@@ -74,10 +82,17 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+
+  }
   ngAfterViewInit() {
     this.tlist.changes.subscribe(t => {
       this.spinner.hide();
+      setTimeout(() => {
+        M.Tabs.init(document.querySelector('.tabs'), {});
+
+      }, 500);
     });
     var elem = document.querySelector('.collapsible.expandable');
     var instance = M.Collapsible.init(elem, {
@@ -85,6 +100,10 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     });
     var elems = document.querySelectorAll('.tooltipped');
     var instances = M.Tooltip.init(elems, {});
+    setTimeout(() => {
+      M.Tabs.init(document.querySelector('.tabs'), {});
+
+    }, 500);
 
   }
 
@@ -105,10 +124,10 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
       this.text = "";
     }
   }
-  addResponse() {
-    if (this.response) {
-      this.responses.push(this.response);
-      this.response = "";
+  addResponse(i) {
+    if (this.text_response) {
+      this.responses[i].txt_resps.push(this.text_response);
+      this.text_response = "";
     }
   }
   editTxt(txt, i) {
@@ -121,14 +140,14 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
     // /this.texts.splice( this.texts.indexOf(txt), 1 );
     this.text = txt;
   }
-  editResp(txt, i) {
-    if (this.response) {
-      this.responses.push(this.response);
+  editResp(txt, j, k) {
+    if (this.text_response) {
+      this.responses[k].txt_resps.push(this.text_response);
     }
-    _.remove(this.responses, function (n, k) {
-      return k == i;
+    _.remove(this.responses[k].txt_resps, function (n, k) {
+      return k == j;
     });
-    this.response = txt;
+    this.text_response = txt;
   }
   test() {
     console.log("TEST");
@@ -165,7 +184,8 @@ export class IntentEditComponent implements OnInit, AfterViewInit {
       this.texts[i].highlightedText = null;
     }
   }
-  setHighlightedTextFromInput() {
-
+  setResponse(i) {
+    //this.rType =  this.responseTypes[i].id;
+    // $('.stepper').activateStepper();
   }
 }

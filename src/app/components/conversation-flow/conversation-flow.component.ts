@@ -25,16 +25,14 @@ export class ConversationFlowComponent implements OnInit {
   @ViewChild('mynetwork') mynetwork: ElementRef;
   @ViewChild('newnodemodal') newnodemodal: ElementRef;
   constructor(private dataService: DataHandlerService,private router: Router,private spinner : NgxSpinnerService) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-  };
+    
   }
   ngOnInit(){
     this.dataService.currentProject.subscribe(project => this.project = project)
     this.spinner.show();
     this.dataService.getFlow(this.project.id).then((data: any) => {
       if(!data){
-        this.isNewFlow = false;
+        this.isNewFlow = true;
         return;
       }
       this.startingNode = data.sp;

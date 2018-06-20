@@ -1,17 +1,24 @@
-<li class="list-group-item col s12 p-10 m-b-10 {{message.type}}">
+<span *ngIf="message.content.type == 1">
+  <li *ngFor="let txt of message.content.txt_resps" class="list-group-item col s12 p-10 m-b-10 {{message.type}}">
+    <img [src]="message.avatar" class="avatar col s2 m-l-0" />
+    <div class="message orange-text">
+      <span  class="white-text">
+        {{txt}}
+      </span>
+    </div>
+  </li>
+</span>
+<li *ngIf="message.content.type == 2" class="list-group-item col s12 p-10 m-b-10 {{message.type}}">
   <img [src]="message.avatar" class="avatar col s2 m-l-0" />
   <div class="message orange-text">
-    <span [hidden]="message.content.type != 1" class="white-text">
-      {{message.content.txt}}
-    </span>
-    <span [hidden]="message.content.type != 2" class="white-text">
+    <span  class="white-text">
       <div class="row" style="margin: 0px;">
         <div class="col s12 m6">
           <div class="card">
             <div class="card-content black-text">
               <p class="left" style="margin:10px;">{{message.content.txt}}</p>
-              <a *ngFor="let child of message.content.children"  (click)="getResponse(child.id)" [ngStyle]="{'background' : child.color,'color' : child.txt_color }" class=" col s12 normal-btn waves-effect waves-grey btn"
-                style="float:  none;">
+              <a *ngFor="let child of message.content.children" (click)="getResponse(child.id)" [ngStyle]="{'background' : child.color,'color' : child.txt_color }"
+                class=" col s12 normal-btn waves-effect waves-grey btn" style="float:  none;">
                 {{child.btn_txt}}
               </a>
             </div>
@@ -19,6 +26,21 @@
         </div>
       </div>
     </span>
-    <app-registration-stepper [hidden]="message.content.type != 3"></app-registration-stepper>
   </div>
 </li>
+<li *ngIf="message.content.type == 3" class="list-group-item col s12 p-10 m-b-10 {{message.type}}">
+  <img [src]="message.avatar" class="avatar col s2 m-l-0" />
+  <div class="message orange-text">
+    <app-event-tracker [response]="message.content.step_resp" ></app-event-tracker>
+  </div>
+</li>
+<span *ngIf="message.content.type == 0">
+    <li class="list-group-item col s12 p-10 m-b-10 {{message.type}}">
+      <img [src]="message.avatar" class="avatar col s2 m-l-0" />
+      <div class="message orange-text">
+        <span  class="white-text">
+          {{message.content.txt}}
+        </span>
+      </div>
+    </li>
+  </span>
