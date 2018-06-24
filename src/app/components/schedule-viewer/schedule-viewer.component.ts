@@ -9,6 +9,7 @@ export class ScheduleViewerComponent implements OnInit,AfterViewInit {
   @Input("data") data;
   ngAfterViewInit(): void {
     var instances = M.Modal.init(document.querySelectorAll('.modal'),{});
+    console.log(this.data);
   }
 
   constructor() { }

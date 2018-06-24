@@ -32,8 +32,7 @@ const routes: Routes = [
   { path: 'reporting', component: ReportingComponent },
   { path: 'picasi/:project', component: AppComponent },
   { path: 'ec', component: EventCalenderComponent },
-  { path: 'stepper', component: RegistrationStepperComponent }
-
+  { path: 'stepper', component: RegistrationStepperComponent},
 ]
 @NgModule({
   imports: [

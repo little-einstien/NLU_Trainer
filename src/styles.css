@@ -319,3 +319,7 @@ i.left {
 .flow-modal {
 	overflow: inherit;
 }
+
+.ngx-datepicker-position-bottom-right {
+    z-index: 20000;
+}

@@ -36,6 +36,7 @@
     "materialize-css": "^1.0.0-rc.1",
     "materialize-stepper": "^2.1.4",
     "ng-pick-datetime": "^5.2.6",
+    "ng2-datepicker": "^3.1.0",
     "ngx-clipboard": "^11.1.0",
     "ngx-color-picker": "^6.3.3",
     "ngx-perfect-scrollbar": "^6.2.0",

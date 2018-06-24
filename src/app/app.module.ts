@@ -38,7 +38,7 @@ import { DemoModule } from './components/event-calender/module';
 import { EventTrackerComponent } from './components/event-tracker/event-tracker.component';
 import { WindowRef } from './common/WindowRef';
 import { ScheduleViewerComponent } from './components/schedule-viewer/schedule-viewer.component';
-
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 
 
@@ -74,7 +74,9 @@ import { ScheduleViewerComponent } from './components/schedule-viewer/schedule-v
     AppRoutingModule,
     FormsModule,
     CalendarModule.forRoot(),
-    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule
+    HttpClientModule, ClipboardModule, NgxSpinnerModule, ColorPickerModule,PerfectScrollbarModule,
+    NgDatepickerModule
+
   ],
   providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,

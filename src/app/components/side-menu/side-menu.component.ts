@@ -75,7 +75,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/newproj']);
       return;
     } else {
-      // this.router.navigate(['/inl']);
+      this.router.navigate(['/inl']);
       // this.projectChange.emit();
     }
   }
